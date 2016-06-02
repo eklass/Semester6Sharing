@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/layout/main.xml",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/layout/main.xml"
+    },
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/layout/message.xml",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/layout/message.xml"
+    }
+]

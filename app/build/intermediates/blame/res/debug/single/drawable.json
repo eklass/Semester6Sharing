@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/icon.png",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/drawable/icon.png"
+    },
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/notificationicon.png",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/drawable/notificationicon.png"
+    }
+]
