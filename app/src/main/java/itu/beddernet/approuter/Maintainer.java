@@ -46,51 +46,66 @@ public class Maintainer extends Thread {
 	 * Handles regular  scans then the device is connected to scatternet
 	 */
 	private void normalScan() {
-
-		double numberOfNeighbours = BluetoothDatalink
-				.getBluetoothDatalinkInstance().numberOfNeighbours();
-		// determine how long to wait between scans depending on the number of
-		// neighbours
-		if (numberOfNeighbours <= 0) {
-			Log
-					.i(TAG,
-							" Maintiner has no neighbours, going to initital scan mode");
-			initScan = true;
-			return;
-		}
-		//Increase the interval for every connected device
-		long currentInterval = (long) (numberOfNeighbours + 1) * searchIntervalTime;
-		int initialWait = (int) (currentInterval * Math.random());
+		double numberOfNeighbours = 0;
 		try {
-			Thread.sleep(initialWait);
-		} catch (InterruptedException e) {
+			numberOfNeighbours = BluetoothDatalink
+					.getBluetoothDatalinkInstance().numberOfNeighbours();
+		} catch (java.lang.NullPointerException e) {
 			e.printStackTrace();
-			Log.e(TAG, "Maintainance sleep interrupted "
-					+ "discovery might start too soon", e);
-			if (aborted) {
+			Log.i(TAG, "Nullpointer Exception occured in normalScan() [Maintainer]");
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.i(TAG, "Exception occured in normalScan() [Maintainer]");
+		}
+			// determine how long to wait between scans depending on the number of
+			// neighbours
+			if (numberOfNeighbours <= 0) {
+				Log.i(TAG,
+						" Maintiner has no neighbours, going to initital scan mode");
+				initScan = true;
 				return;
 			}
-		}
-		Log.i(TAG, " Maintiner starting normal scan");
-
-		long result = BluetoothDatalink.getBluetoothDatalinkInstance()
-				.searchNewConnections();
-		if (result != -1) {
-			Log.i(TAG, "Discovery finished, no neighbours");
-		} else {
-			Log.i(TAG, "Discovery finished, found neighbours");
-		}
-		try {
-			Thread.sleep(currentInterval - initialWait);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			Log.e(TAG, "Maintainance sleep interrupted, discovery "
-					+ "might start too soon", e);
-			if (aborted) {
-				return;
+			//Increase the interval for every connected device
+			long currentInterval = (long) (numberOfNeighbours + 1) * searchIntervalTime;
+			int initialWait = (int) (currentInterval * Math.random());
+			try {
+				Thread.sleep(initialWait);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				Log.e(TAG, "Maintainance sleep interrupted "
+						+ "discovery might start too soon", e);
+				if (aborted) {
+					return;
+				}
+			}
+			Log.i(TAG, " Maintiner starting normal scan");
+			long result = 0;
+			try {
+				result = BluetoothDatalink.getBluetoothDatalinkInstance()
+						.searchNewConnections();
+			} catch (java.lang.NullPointerException e) {
+				e.printStackTrace();
+				Log.i(TAG, "Nullpointer Exception occured in normalScan() [Maintainer]");
+			} catch (Exception e) {
+				e.printStackTrace();
+				Log.i(TAG, "Exception occured in normalScan() [Maintainer]");
+			}
+			if (result != -1) {
+				Log.i(TAG, "Discovery finished, no neighbours");
+			} else {
+				Log.i(TAG, "Discovery finished, found neighbours");
+			}
+			try {
+				Thread.sleep(currentInterval - initialWait);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				Log.e(TAG, "Maintainance sleep interrupted, discovery "
+						+ "might start too soon", e);
+				if (aborted) {
+					return;
+				}
 			}
 		}
-	}
 
 	/**
 	 * Handles initial scans when device is not connected to scatternet

@@ -105,6 +105,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			// onCreate(null);
 			Intent bindIntent = new Intent(
 					"itu.beddernet.approuter.BeddernetService");
+			bindIntent.setPackage("itu.beddernet.approuter");
 			this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 		}
 		super.onResume();
@@ -120,10 +121,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 		setContentView(R.layout.main);
-		Button milestoneBox = (Button) findViewById(R.id.Milestone);
-		milestoneBox.setOnClickListener(buttonListnener);
-		Button magicBox = (Button) findViewById(R.id.Magic);
-		magicBox.setOnClickListener(buttonListnener);
+		Button IphoneBox = (Button) findViewById(R.id.Iphone);
+		IphoneBox.setOnClickListener(buttonListnener);
+		Button macbookBox = (Button) findViewById(R.id.Macbook);
+		macbookBox.setOnClickListener(buttonListnener);
 		Button SvalurBox = (Button) findViewById(R.id.Svalur);
 		SvalurBox.setOnClickListener(buttonListnener);
 		Button ituHeroButton = (Button) findViewById(R.id.ituHero);
@@ -273,9 +274,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private OnClickListener buttonListnener = new OnClickListener() {
 		public void onClick(View src) {
 			switch (src.getId()) {
-			case R.id.Magic:
+			case R.id.Macbook:
 				try {
-					mBeddernetService.manualConnect("00:22:A5:F7:6C:50");
+					mBeddernetService.manualConnect("10:40:F3:ED:38:D5");
 				} catch (RemoteException e1) {
 					Log.e(TAG, "Could not manually connect", e1);
 				}
@@ -289,9 +290,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				}
 				refreshDeviceList();
 				break;
-			case R.id.Milestone:
+			case R.id.Iphone:
 				try {
-					mBeddernetService.manualConnect("00:24:BA:97:58:77");
+					mBeddernetService.manualConnect("80:EA:96:14:FB:9E");
 				} catch (RemoteException e1) {
 					Log.e(TAG, "Could not manually connect", e1);
 				}

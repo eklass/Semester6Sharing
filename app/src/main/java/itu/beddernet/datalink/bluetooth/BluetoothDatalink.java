@@ -74,17 +74,28 @@ public class BluetoothDatalink implements DatalinkInterface {
 	 * Starts the bluetooth radio and enables the setup of BEDnet
 	 */
 	public void setup() {
-		if (!btAdapter.isEnabled()) {
-			Log.d(TAG, "BT is off. Start an activity");
-			Intent enableIntent = new Intent(
-					BluetoothAdapter.ACTION_REQUEST_ENABLE);
-			enableIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			if (BeddernetService.getBeddernetInstance() != null){
-			BeddernetService.getBeddernetInstance().startActivity(enableIntent);
+		/*CRITICAL FOR ANDROID EMULATOR-> EMULATOR HAS NO BLUETOOTH-> NULLPOINTEREXCEPTION*/
+
+			if (btAdapter==null) {
+				Log.d(TAG, "btAdapter is Null!!");
 			}
-		} else {
-			btStatus(true); // It on. All is good good good
+		try {
+			if (!btAdapter.isEnabled()) {
+				Log.d(TAG, "BT is off. Start an activity");
+				Intent enableIntent = new Intent(
+						BluetoothAdapter.ACTION_REQUEST_ENABLE);
+				enableIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				if (BeddernetService.getBeddernetInstance() != null){
+					BeddernetService.getBeddernetInstance().startActivity(enableIntent);
+				}
+			} else {
+				btStatus(true); // It on. All is good good good
+			}
+		} catch (Exception e) {
+			Log.d(TAG, "Problem with starting bluetooth default adapter"
+					+ e.getMessage());
 		}
+
 	}
 
 	/**

@@ -4,26 +4,26 @@
     api-level="16"
     density="hdpi"
     format="7"
-    timestamp="1464884555001322000" >
+    timestamp="1464907968616396000" >
 
     <task
         name="javac"
-        duration="1351" />
+        duration="3815" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="364" />
+        duration="3" />
     <task
         name="verifier"
-        duration="30" />
+        duration="1" />
 
     <artifact
         location="/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
-    <build timestamp="1464884555001322000" >
+    <build timestamp="1464907968616396000" >
         <artifact
             location="/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
