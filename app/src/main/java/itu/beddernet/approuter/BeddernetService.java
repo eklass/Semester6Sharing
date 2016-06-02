@@ -118,7 +118,10 @@ public class BeddernetService extends Service {
 		mBuilder.setContentTitle(contentTitle);
 		mBuilder.setContentText("contentText");
 
-		Intent notificationIntent = new Intent(this, BeddernetConsole.class);
+		//Intent notificationIntent = new Intent(this, BeddernetConsole.class);
+		Intent notificationIntent = new Intent("itu.beddernet.BerdernetConsole");
+		notificationIntent.setPackage("itu.beddernet");
+
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		stackBuilder.addParentStack(BeddernetConsole.class);
 
@@ -130,6 +133,7 @@ public class BeddernetService extends Service {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		// notificationID allows you to update the notification later on.
 		mNotificationManager.notify(HELLO_ID, mBuilder.build());
+		//startActivity(notificationIntent);
 	}
 
 	@Override
