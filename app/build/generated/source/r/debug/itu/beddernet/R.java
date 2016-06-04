@@ -1612,16 +1612,15 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020049;
         public static final int abc_textfield_search_material=0x7f02004a;
         public static final int icon=0x7f02004b;
-        public static final int notification_template_icon_bg=0x7f02004d;
-        public static final int notificationicon=0x7f02004c;
+        public static final int minion=0x7f02004c;
+        public static final int notification_template_icon_bg=0x7f02004e;
+        public static final int notificationicon=0x7f02004d;
     }
     public static final class id {
         public static final int Dongle4=0x7f0c0059;
         public static final int Iphone=0x7f0c0053;
-        public static final int MSI=0x7f0c0056;
         public static final int Macbook=0x7f0c0052;
         public static final int MaintainerBox=0x7f0c005a;
-        public static final int Svalur=0x7f0c0054;
         public static final int TableLayout01=0x7f0c0050;
         public static final int TableRow01=0x7f0c0051;
         public static final int TableRow03=0x7f0c0055;
@@ -1662,12 +1661,13 @@ containing a value of this type.
         public static final int expanded_menu=0x7f0c0038;
         public static final int home=0x7f0c0004;
         public static final int homeAsUp=0x7f0c000d;
+        public static final int huawei=0x7f0c0057;
+        public static final int huaweip6=0x7f0c0058;
         public static final int icon=0x7f0c0029;
         public static final int ifRoom=0x7f0c001e;
         public static final int image=0x7f0c0026;
         public static final int in=0x7f0c005b;
         public static final int info=0x7f0c0068;
-        public static final int ituHero=0x7f0c0058;
         public static final int line1=0x7f0c0062;
         public static final int line3=0x7f0c0066;
         public static final int listMode=0x7f0c0009;
@@ -1683,7 +1683,6 @@ containing a value of this type.
         public static final int progress_circular=0x7f0c0005;
         public static final int progress_horizontal=0x7f0c0006;
         public static final int radio=0x7f0c003b;
-        public static final int rasmusLaptop=0x7f0c0057;
         public static final int screen=0x7f0c0015;
         public static final int scrollIndicatorDown=0x7f0c0035;
         public static final int scrollIndicatorUp=0x7f0c0032;
@@ -1720,6 +1719,8 @@ containing a value of this type.
         public static final int topPanel=0x7f0c002e;
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0012;
+        public static final int wave1=0x7f0c0056;
+        public static final int wave2=0x7f0c0054;
         public static final int withText=0x7f0c0020;
         public static final int wrap_content=0x7f0c0013;
     }

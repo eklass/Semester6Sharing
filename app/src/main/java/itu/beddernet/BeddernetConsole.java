@@ -40,6 +40,11 @@ import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
+// TODO: Es bleiben jedoch insgemein noch Probleme/Dinge die erledigt werden müssen:
+// TODO:1. Beim Versenden der Files Exception
+// TODO:2. Automatisches installieren muss noch implementiert werden
+// TODO:3. GUI anpassen, dass man beliebigen Text verschicken kann
+
 public class BeddernetConsole extends Activity implements ServiceConnection {
 
 	private static final int CONTEXT_MENU_SEND_MESSAGE = 1;
@@ -125,17 +130,19 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		IphoneBox.setOnClickListener(buttonListnener);
 		Button macbookBox = (Button) findViewById(R.id.Macbook);
 		macbookBox.setOnClickListener(buttonListnener);
-		Button SvalurBox = (Button) findViewById(R.id.Svalur);
-		SvalurBox.setOnClickListener(buttonListnener);
-		Button ituHeroButton = (Button) findViewById(R.id.ituHero);
-		ituHeroButton.setOnClickListener(buttonListnener);
-		Button rasmusLaptopButton = (Button) findViewById(R.id.rasmusLaptop);
-		rasmusLaptopButton.setOnClickListener(buttonListnener);
+		Button wave2Box = (Button) findViewById(R.id.wave2);
+		wave2Box.setOnClickListener(buttonListnener);
+		Button wave1Button = (Button) findViewById(R.id.wave1);
+		wave1Button.setOnClickListener(buttonListnener);
+		Button huaweiButton = (Button) findViewById(R.id.huawei);
+		huaweiButton.setOnClickListener(buttonListnener);
+		Button huaweiP6Button = (Button) findViewById(R.id.huaweip6);
+		huaweiP6Button.setOnClickListener(buttonListnener);
 		Button mr4Button = (Button) findViewById(R.id.Dongle4);
 		mr4Button.setOnClickListener(buttonListnener);
 
-		Button MSIBox = (Button) findViewById(R.id.MSI);
-		MSIBox.setOnClickListener(buttonListnener);
+		//Button MSIBox = (Button) findViewById(R.id.MSI);
+		//MSIBox.setOnClickListener(buttonListnener);
 		CheckBox maintainer = (CheckBox) findViewById(R.id.MaintainerBox);
 		maintainer.setOnCheckedChangeListener(checkBoxListener);
 
@@ -298,24 +305,32 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				}
 				refreshDeviceList();
 				break;
-			case R.id.Svalur:
+			case R.id.wave2:
 				try {
-					mBeddernetService.manualConnect("00:15:83:15:A2:B8");
+					mBeddernetService.manualConnect("A0:75:91:58:5B:6D");
 				} catch (RemoteException e1) {
 					Log.e(TAG, "Could not manually connect", e1);
 				}
 				refreshDeviceList();
 				break;
-			case R.id.ituHero:
+			case R.id.wave1:
 				try {
-					mBeddernetService.manualConnect("00:22:A5:B3:2D:3E");
+					mBeddernetService.manualConnect("E8:E5:D6:49:E0:68");
 				} catch (RemoteException e1) {
 					Log.e(TAG, "Could not manually connect", e1);
 				}
 				refreshDeviceList();
 				break;
+				case R.id.huaweip6:
+					try {
+						mBeddernetService.manualConnect("24:69:A5:94:D8:96");
+					} catch (RemoteException e1) {
+						Log.e(TAG, "Could not manually connect", e1);
+					}
+					refreshDeviceList();
+					break;
 
-			case R.id.MSI:
+			/*case R.id.MSI:
 				try {
 					mBeddernetService.manualConnect("00:22:A5:B4:78:C3");
 				} catch (RemoteException e1) {
@@ -323,10 +338,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				}
 				refreshDeviceList();
 				break;
-
-			case R.id.rasmusLaptop:
+*/
+			case R.id.huawei:
 				try {
-					mBeddernetService.manualConnect("00:03:78:CB:DA:6F");
+					mBeddernetService.manualConnect("88:E3:AB:C5:89:9F");
 				} catch (RemoteException e1) {
 					Log.e(TAG, "Could not manually connect", e1);
 				}
@@ -347,7 +362,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		}
 	};
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings("unused") 
 	private void sendMulticast(String[] addresses, byte[] appMessage) {
 		try {
 			mBeddernetService.sendMulticast(addresses, null, appMessage,
