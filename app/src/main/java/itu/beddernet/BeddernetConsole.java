@@ -381,7 +381,32 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			e.printStackTrace();
 		}
 	}
+	private void sendMessage(String address,String message) {
+		Log.i(TAG,
+				"BedderTestPlatform: DeviceList clicked, sending message to: "
+						+ address);
+		outputTextView.append("Sending message to " + address + "\n");
+		try {
+			//byte[] message = "---Hello from BedderTestPlatform".getBytes();
+			byte[] messageBegin="-".getBytes();
+			byte[] realMessage=message.getBytes();
+			// create a messageBegin array that is the size of the two arrays
+			byte[] destination = new byte[messageBegin.length + realMessage.length];
 
+			// copy messageBegin into start of destination (from pos 0, copy messageBegin.length bytes)
+			System.arraycopy(messageBegin, 0, destination, 0, messageBegin.length);
+
+			// copy mac into end of destination (from pos messageBegin.length, copy realMessage.length bytes)
+			System.arraycopy(realMessage, 0, destination, messageBegin.length, realMessage.length);
+
+			destination[0] = 2;
+			mBeddernetService.sendUnicast(address, null, destination,
+					applicationIdentifier);
+		} catch (RemoteException e) {
+			Log.e(TAG, "Remote exception from service, could not send message");
+			e.printStackTrace();
+		}
+	}
 	private void sendMessage(String address) {
 		Log.i(TAG,
 				"BedderTestPlatform: DeviceList clicked, sending message to: "
@@ -512,6 +537,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			return true;
 		case CONTECT_MENU_DISCONNECT:
 			try {
+				sendMessage(selectedAddress,"The connection was closed from the other side");
 				mBeddernetService.manualDisconnect(selectedAddress);
 			} catch (RemoteException e) {
 				Log.e(TAG, "Could not manually disconnect", e);
@@ -651,6 +677,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 						+ RTTTime + "\n");
 
 			case TEXT_MESSAGE:
+				refreshDeviceList();
 				String msg = new String(message, 1, message.length - 1);
 				outputTextView.append("Message received from: " + senderAddress
 						+ "Message text: " + msg + "\n");
