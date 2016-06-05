@@ -354,6 +354,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		}
 	};
 
+	/*
+	* This method will be called, if someone clicks on a device to communicate
+	* */
 	private OnItemClickListener mListListener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
 
@@ -361,6 +364,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			if (address != null) {
 				address = address.substring(0, 17); // Ugly removes the status
 				sendMessage(address);
+				//after sendind Message, clear inputText
+				inputText.setText("");
+				refreshDeviceList();
 			}
 		}
 	};
@@ -423,13 +429,19 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		} catch (NotFoundException e2) {
 			Log.e(TAG, "Couldn't open resource", e2);
 		}
+		catch (Exception e) {
+			Log.e(TAG, "Could open resource. The target device may have not opened Beddernet");
+		}
 		byte[] buffer = new byte[bufferSize];
 		buffer[0] = FILE_MESSAGE;
 		try {
 			long startTime = System.currentTimeMillis();
 			while (input.read(buffer, 1, buffer.length - 1) != -1) {
-				mBeddernetService.sendUnicast(address, null, buffer,
-						applicationIdentifier);
+				try {mBeddernetService.sendUnicast(address, null, buffer,
+						applicationIdentifier);}
+				catch (Exception e) {
+					Log.e(TAG, "Could open resource. The target device may have not opened Beddernet");
+				}
 			}
 			byte[] end = new byte[1];
 			end[0] = FILE_END;
@@ -505,9 +517,11 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				Log.e(TAG, "Could not manually disconnect", e);
 				e.printStackTrace();
 			}
+			refreshDeviceList();
 			return true;
 		case CONTEXT_MENU_SEND_FILE:
-			sendFile(selectedAddress);
+			if(selectedAddress!=""|selectedAddress!=null)
+				sendFile(selectedAddress);
 			return true;
 		case CONTEXT_MENU_SEND_RTT:
 			sendRTT(selectedAddress);
@@ -589,6 +603,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		public void update(String senderAddress, byte[] message)
 				throws RemoteException {
+			// if some send someoneelse a message, that the device list will be updated (to see, who send a message)
+			refreshDeviceList();
 			byte type = message[0];
 			// Log.d(TAG, "Message received at BedderTestPlatform");
 			switch (type) {

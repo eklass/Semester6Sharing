@@ -94,6 +94,10 @@ public class DeviceVO implements Runnable {
 			try {
 				//size of incoming bytearray always preceeds array
 				bytesRead = din.readInt();
+				if (bytesRead<=0) {
+					Log.e(TAG, "Array is negative!!!!! Not so good!");
+					break;
+				}
 				message = new byte[bytesRead];
 				din.readFully(message);
 				type = message[0];

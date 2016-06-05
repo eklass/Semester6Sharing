@@ -332,6 +332,7 @@ public class BeddernetService extends Service {
 				UniAppMessage msg = new UniAppMessage(ConfigInfo.netAddressVal,
 						networkAddressAsLong, fromServiceHash, appMessage);
 				router.sendMessage(msg);
+
 			}
 		}
 
