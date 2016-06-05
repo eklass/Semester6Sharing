@@ -34,6 +34,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ import android.widget.AdapterView.OnItemClickListener;
 // TODO:3. GUI anpassen, dass man beliebigen Text verschicken kann
 
 public class BeddernetConsole extends Activity implements ServiceConnection {
+
+	private EditText inputText;
 
 	private static final int CONTEXT_MENU_SEND_MESSAGE = 1;
 	private static final int CONTECT_MENU_DISCONNECT = 2;
@@ -379,9 +382,21 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 						+ address);
 		outputTextView.append("Sending message to " + address + "\n");
 		try {
-			byte[] message = "---Hello from BedderTestPlatform".getBytes();
-			message[0] = 2;
-			mBeddernetService.sendUnicast(address, null, message,
+			inputText=(EditText)findViewById(R.id.txtInput);
+			//byte[] message = "---Hello from BedderTestPlatform".getBytes();
+			byte[] messageBegin="-".getBytes();
+			byte[] realMessage=inputText.getText().toString().getBytes();
+			// create a messageBegin array that is the size of the two arrays
+			byte[] destination = new byte[messageBegin.length + realMessage.length];
+
+			// copy messageBegin into start of destination (from pos 0, copy messageBegin.length bytes)
+			System.arraycopy(messageBegin, 0, destination, 0, messageBegin.length);
+
+			// copy mac into end of destination (from pos messageBegin.length, copy realMessage.length bytes)
+			System.arraycopy(realMessage, 0, destination, messageBegin.length, realMessage.length);
+
+			destination[0] = 2;
+			mBeddernetService.sendUnicast(address, null, destination,
 					applicationIdentifier);
 		} catch (RemoteException e) {
 			Log.e(TAG, "Remote exception from service, could not send message");

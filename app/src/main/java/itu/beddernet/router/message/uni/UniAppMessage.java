@@ -40,7 +40,7 @@ public class UniAppMessage extends UniMessage {
 	 * Class constructor
 	 * @param fromNetworkAddress specifies the to address
 	 * @param toNetworkAddress specifies the from  address
-	 * @param serviceHash The applications service hash on the receiving end 
+	 * @param applicationIdentifierHash The applications service hash on the receiving end
 	 * @param appMessage The message
 	 */
 	public UniAppMessage(long fromNetworkAddress, long toNetworkAddress,
