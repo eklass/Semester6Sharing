@@ -7,6 +7,7 @@ import itu.beddernet.common.NetworkAddress;
 import itu.beddernet.router.dsdv.info.ConfigInfo;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +18,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.res.Resources.NotFoundException;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -63,6 +67,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private static final int MENU_BEDNET_OFF = 3;
 	private static final int MENU_MANUAL_REFRESH = 4;
 	private static final int MENU_SERVICES = 5;
+	private static final int MENU_SHAREAPP = 6;
 
 	private static final byte FILE_MESSAGE = 1;
 	private static final byte TEXT_MESSAGE = 2;
@@ -119,6 +124,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		super.onResume();
 	}
 
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -160,6 +166,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		activity = this;
 
 		outputTextView = (TextView) findViewById(R.id.outputTextView);
+
+
+
 	}
 
 	/* Creates the menu items */
@@ -170,6 +179,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		menu.add(0, MENU_DISCOVERABLE, 0, "Discoverable");
 		menu.add(0, MENU_BLUETOOTH_OFF, 0, "Bluetooth off");
 		menu.add(0, MENU_BEDNET_OFF, 0, "Bednet off");
+		menu.add(0, MENU_SHAREAPP, 0 ,"Share app");
 		return true;
 	}
 
@@ -230,6 +240,24 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			}
 
 			return true;
+
+		case MENU_SHAREAPP:
+			// Get current ApplicationInfo to find .apk path
+			ApplicationInfo app = getApplicationContext().getApplicationInfo();
+			String filePath = app.sourceDir;
+
+			Intent intent = new Intent(Intent.ACTION_SEND);
+
+			// MIME of .apk is "application/vnd.android.package-archive".
+			// but Bluetooth does not accept this. Let's use "*/*" instead.
+			intent.setType("*/*");
+
+			// Only use Bluetooth to send .apk
+			intent.setPackage("com.android.bluetooth");
+
+			// Append file and send Intent
+			intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(filePath)));
+			startActivity(Intent.createChooser(intent, "Share app"));
 		}
 		return false;
 	}
@@ -646,11 +674,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 						fileOut = openFileOutput("audio2.ogg", MODE_PRIVATE);
 						out = new BufferedOutputStream(fileOut);
 					} catch (IOException e) {
-						Log
-								.e(
-										TAG,
-										"Error in writing to stream, closing outPut stream",
-										e);
+						Log.e(TAG,"Error in writing to stream, closing outPut stream", e);
 					}
 
 				}
@@ -696,6 +720,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				mBeddernetService.sendUnicast(senderAddress, null, ackMessage,
 						applicationIdentifier);
 				outputTextView.append(result);
+				final MediaPlayer mp = MediaPlayer.create(activity, R.raw.walterminion);
+				mp.start();
 				try {
 					out.close();
 					fileOut.close();
@@ -708,6 +734,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				break;
 			case FILE_END_ACK:
 				fileTransferComplete();
+
 				break;
 			case FILE_FRANSFER_REQUEST:
 				sendFile(senderAddress);
