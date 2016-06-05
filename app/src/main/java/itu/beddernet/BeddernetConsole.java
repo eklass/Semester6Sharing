@@ -41,7 +41,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
 // TODO: Es bleiben jedoch insgemein noch Probleme/Dinge die erledigt werden müssen:
-// TODO:1. Beim Versenden der Files Exception
+// TODO:1. Beim Versenden der Files Exception(Nicht immer
 // TODO:2. Automatisches installieren muss noch implementiert werden
 // TODO:3. GUI anpassen, dass man beliebigen Text verschicken kann
 
