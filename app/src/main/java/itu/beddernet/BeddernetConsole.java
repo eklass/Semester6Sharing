@@ -1,13 +1,16 @@
 package itu.beddernet;
 
-import itu.beddernet.approuter.BeddernetService;
 import itu.beddernet.approuter.IBeddernetService;
 import itu.beddernet.approuter.IBeddernetServiceCallback;
+import itu.beddernet.common.BeddernetInfo;
 import itu.beddernet.common.NetworkAddress;
+import itu.beddernet.recordSound.recordActivity;
 import itu.beddernet.router.dsdv.info.ConfigInfo;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +27,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -45,6 +49,10 @@ import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 // TODO: Es bleiben jedoch insgemein noch Probleme/Dinge die erledigt werden müssen:
 // TODO:1. Beim Versenden der Files Exception(Nicht immer
 // TODO:2. Automatisches installieren muss noch implementiert werden
@@ -55,11 +63,12 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private EditText inputText;
 
 	private static final int CONTEXT_MENU_SEND_MESSAGE = 1;
-	private static final int CONTECT_MENU_DISCONNECT = 2;
+	private static final int CONTEXT_MENU_DISCONNECT = 2;
 	private static final int CONTEXT_MENU_SEND_FILE = 3;
 	private static final int CONTEXT_MENU_SEND_RTT = 4;
 	private static final int CONTEXT_MENU_VIEW_SERVICES = 5;
 	private static final int CONTEXT_MENU_SEND_FILE_DUPLEX = 6;
+	private static final int CONTEXT_MENU_SEND_RECORDED_FILE = 7;
 
 	private static final int MENU_DISCOVERY = 0;
 	private static final int MENU_DISCOVERABLE = 1;
@@ -68,6 +77,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private static final int MENU_MANUAL_REFRESH = 4;
 	private static final int MENU_SERVICES = 5;
 	private static final int MENU_SHAREAPP = 6;
+	private static final int MENU_RECORDAUDIO = 7;
 
 	private static final byte FILE_MESSAGE = 1;
 	private static final byte TEXT_MESSAGE = 2;
@@ -82,9 +92,13 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 	private long RTTStartTime = 0;
 	private long RTTEndTime = 0;
+	public boolean sendAudioFile = false;
+	String mFileNameToSend = Environment.getExternalStorageDirectory().getAbsolutePath();
+	String mFileNameToPlay = Environment.getExternalStorageDirectory().getAbsolutePath();
+	MediaPlayer mp = null;
 
 	byte[] rttMessage = new byte[9];
-	private String TAG = itu.beddernet.common.BeddernetInfo.TAG;
+	private String TAG = BeddernetInfo.TAG;
 	private IBeddernetService mBeddernetService;
 	private Activity activity;
 	private ArrayAdapter<String> mDeviceArrayAdapter;
@@ -97,6 +111,11 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	ServiceConnection sc = this;
 	public TextView outputTextView;
 	private int filesPending;
+	/**
+	 * ATTENTION: This was auto-generated to implement the App Indexing API.
+	 * See https://g.co/AppIndexing/AndroidStudio for more information.
+	 */
+	private GoogleApiClient client;
 
 	protected void onDestroy() {
 		if (mBeddernetService != null) {
@@ -125,9 +144,14 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	}
 
 
-	/** Called when the activity is first created. */
+	/**
+	 * Called when the activity is first created.
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
+		//mFileNameToPlay += "/audiorecordtest.3gp";
+
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		Intent bindIntent = new Intent(
@@ -135,8 +159,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 		setContentView(R.layout.main);
-		Button IphoneBox = (Button) findViewById(R.id.Iphone);
-		IphoneBox.setOnClickListener(buttonListnener);
 		Button macbookBox = (Button) findViewById(R.id.Macbook);
 		macbookBox.setOnClickListener(buttonListnener);
 		Button wave2Box = (Button) findViewById(R.id.wave2);
@@ -147,8 +169,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		huaweiButton.setOnClickListener(buttonListnener);
 		Button huaweiP6Button = (Button) findViewById(R.id.huaweip6);
 		huaweiP6Button.setOnClickListener(buttonListnener);
-		Button mr4Button = (Button) findViewById(R.id.Dongle4);
-		mr4Button.setOnClickListener(buttonListnener);
+		Button recVoiceButton = (Button) findViewById(R.id.recVoice);
+		recVoiceButton.setOnClickListener(buttonListnener);
 
 		//Button MSIBox = (Button) findViewById(R.id.MSI);
 		//MSIBox.setOnClickListener(buttonListnener);
@@ -167,8 +189,22 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		outputTextView = (TextView) findViewById(R.id.outputTextView);
 
+		mFileNameToSend += "/audiorecordtest.3gp";
+		mFileNameToPlay += "/newStream.3gp";
+		mp = new MediaPlayer();
 
+		outputTextView.append("Empfangene Datei wird abgespielt...");
+		try {
+			mp.setDataSource(mFileNameToPlay);
+			mp.prepare();
+		} catch (IOException e) {
+			Log.i(TAG,"Fehler beim setzen der DataSource[Methode-onCreate]");
+			e.printStackTrace();
+		}
 
+		// ATTENTION: This was auto-generated to implement the App Indexing API.
+		// See https://g.co/AppIndexing/AndroidStudio for more information.
+		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 	}
 
 	/* Creates the menu items */
@@ -179,85 +215,86 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		menu.add(0, MENU_DISCOVERABLE, 0, "Discoverable");
 		menu.add(0, MENU_BLUETOOTH_OFF, 0, "Bluetooth off");
 		menu.add(0, MENU_BEDNET_OFF, 0, "Bednet off");
-		menu.add(0, MENU_SHAREAPP, 0 ,"Share app");
+		menu.add(0, MENU_SHAREAPP, 0, "Share app");
 		return true;
 	}
 
 	/* Handles item selections */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case MENU_MANUAL_REFRESH:
-			refreshDeviceList();
-			return true;
-		case MENU_DISCOVERABLE:
-			try {
-				mBeddernetService.setDiscoverable(true);
-			} catch (RemoteException e) {
-				Log.e(TAG, "Remote Exception while making discoverable", e);
-			}
-			return true;
-		case MENU_BEDNET_OFF:
-			Log.d(TAG, "onClick: stopping service");
-			finish();
-			return true;
-		case MENU_BLUETOOTH_OFF:
-			Log.d(TAG, "Beddernet tries to manually turn Bluetooth off");
-			try {
-				mBeddernetService.disableBluetooth();
-			} catch (RemoteException e) {
-				Log.e(TAG, "Failed to kill bluetooth", e);
-			}
-			return true;
-		case MENU_DISCOVERY:
-			Log.d(TAG, "findNeighbors in BeddernetConsole");
-			new findNeighborsTask(mBeddernetService).execute(null, null, null);
-			return true;
-
-		case MENU_SERVICES:
-			Log.d(TAG, "view services in BeddernetConsole");
-
-			try {
-				long[] hashes = mBeddernetService
-						.getAllUAIHOnDevice(NetworkAddress
-								.castNetworkAddressToString(ConfigInfo.netAddressVal));
-				StringBuilder sb = new StringBuilder();
-				sb.append("Service hashes on devive:\n");
-				for (long l : hashes) {
-					sb.append(l);
-					sb.append("\n");
+			case MENU_MANUAL_REFRESH:
+				refreshDeviceList();
+				return true;
+			case MENU_DISCOVERABLE:
+				try {
+					mBeddernetService.setDiscoverable(true);
+				} catch (RemoteException e) {
+					Log.e(TAG, "Remote Exception while making discoverable", e);
 				}
-				if (hashes != null) {
-					Toast.makeText(
-							this,
-							"Number of hashes: " + hashes.length + " "
-									+ sb.toString(), Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(this, "Hashes was null", Toast.LENGTH_LONG)
-							.show();
+				return true;
+			case MENU_BEDNET_OFF:
+				Log.d(TAG, "onClick: stopping service");
+				finish();
+				return true;
+			case MENU_BLUETOOTH_OFF:
+				Log.d(TAG, "Beddernet tries to manually turn Bluetooth off");
+				try {
+					mBeddernetService.disableBluetooth();
+				} catch (RemoteException e) {
+					Log.e(TAG, "Failed to kill bluetooth", e);
 				}
-			} catch (RemoteException e) {
-				Log.e(TAG, "Failed to get services", e);
-			}
+				return true;
+			case MENU_DISCOVERY:
+				Log.d(TAG, "findNeighbors in BeddernetConsole");
+				new findNeighborsTask(mBeddernetService).execute(null, null, null);
+				return true;
 
-			return true;
+			case MENU_SERVICES:
+				Log.d(TAG, "view services in BeddernetConsole");
 
-		case MENU_SHAREAPP:
-			// Get current ApplicationInfo to find .apk path
-			ApplicationInfo app = getApplicationContext().getApplicationInfo();
-			String filePath = app.sourceDir;
+				try {
+					long[] hashes = mBeddernetService
+							.getAllUAIHOnDevice(NetworkAddress
+									.castNetworkAddressToString(ConfigInfo.netAddressVal));
+					StringBuilder sb = new StringBuilder();
+					sb.append("Service hashes on devive:\n");
+					for (long l : hashes) {
+						sb.append(l);
+						sb.append("\n");
+					}
+					if (hashes != null) {
+						Toast.makeText(
+								this,
+								"Number of hashes: " + hashes.length + " "
+										+ sb.toString(), Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(this, "Hashes was null", Toast.LENGTH_LONG)
+								.show();
+					}
+				} catch (RemoteException e) {
+					Log.e(TAG, "Failed to get services", e);
+				}
 
-			Intent intent = new Intent(Intent.ACTION_SEND);
+				return true;
 
-			// MIME of .apk is "application/vnd.android.package-archive".
-			// but Bluetooth does not accept this. Let's use "*/*" instead.
-			intent.setType("*/*");
+			case MENU_SHAREAPP:
+				// Get current ApplicationInfo to find .apk path
+				ApplicationInfo app = getApplicationContext().getApplicationInfo();
+				String filePath = app.sourceDir;
 
-			// Only use Bluetooth to send .apk
-			intent.setPackage("com.android.bluetooth");
+				Intent intent = new Intent(Intent.ACTION_SEND);
 
-			// Append file and send Intent
-			intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(filePath)));
-			startActivity(Intent.createChooser(intent, "Share app"));
+				// MIME of .apk is "application/vnd.android.package-archive".
+				// but Bluetooth does not accept this. Let's use "*/*" instead.
+				intent.setType("*/*");
+
+				// Only use Bluetooth to send .apk
+				intent.setPackage("com.android.bluetooth");
+
+				// Append file and send Intent
+				intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(filePath)));
+				startActivity(Intent.createChooser(intent, "Share app"));
+
 		}
 		return false;
 	}
@@ -312,46 +349,31 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private OnClickListener buttonListnener = new OnClickListener() {
 		public void onClick(View src) {
 			switch (src.getId()) {
-			case R.id.Macbook:
-				try {
-					mBeddernetService.manualConnect("10:40:F3:ED:38:D5");
-				} catch (RemoteException e1) {
-					Log.e(TAG, "Could not manually connect", e1);
-				}
-				refreshDeviceList();
-				break;
-			case R.id.Dongle4:
-				try {
-					mBeddernetService.manualConnect("00:15:83:18:5C:BB");
-				} catch (RemoteException e1) {
-					Log.e(TAG, "Could not manually connect", e1);
-				}
-				refreshDeviceList();
-				break;
-			case R.id.Iphone:
-				try {
-					mBeddernetService.manualConnect("80:EA:96:14:FB:9E");
-				} catch (RemoteException e1) {
-					Log.e(TAG, "Could not manually connect", e1);
-				}
-				refreshDeviceList();
-				break;
-			case R.id.wave2:
-				try {
-					mBeddernetService.manualConnect("A0:75:91:58:5B:6D");
-				} catch (RemoteException e1) {
-					Log.e(TAG, "Could not manually connect", e1);
-				}
-				refreshDeviceList();
-				break;
-			case R.id.wave1:
-				try {
-					mBeddernetService.manualConnect("E8:E5:D6:49:E0:68");
-				} catch (RemoteException e1) {
-					Log.e(TAG, "Could not manually connect", e1);
-				}
-				refreshDeviceList();
-				break;
+				case R.id.Macbook:
+					try {
+						mBeddernetService.manualConnect("10:40:F3:ED:38:D5");
+					} catch (RemoteException e1) {
+						Log.e(TAG, "Could not manually connect", e1);
+					}
+					refreshDeviceList();
+					break;
+
+				case R.id.wave2:
+					try {
+						mBeddernetService.manualConnect("A0:75:91:58:5B:6D");
+					} catch (RemoteException e1) {
+						Log.e(TAG, "Could not manually connect", e1);
+					}
+					refreshDeviceList();
+					break;
+				case R.id.wave1:
+					try {
+						mBeddernetService.manualConnect("E8:E5:D6:49:E0:68");
+					} catch (RemoteException e1) {
+						Log.e(TAG, "Could not manually connect", e1);
+					}
+					refreshDeviceList();
+					break;
 				case R.id.huaweip6:
 					try {
 						mBeddernetService.manualConnect("24:69:A5:94:D8:96");
@@ -361,23 +383,31 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 					refreshDeviceList();
 					break;
 
-			/*case R.id.MSI:
-				try {
-					mBeddernetService.manualConnect("00:22:A5:B4:78:C3");
-				} catch (RemoteException e1) {
-					Log.e(TAG, "Could not manually connect", e1);
-				}
-				refreshDeviceList();
-				break;
-*/
-			case R.id.huawei:
-				try {
-					mBeddernetService.manualConnect("88:E3:AB:C5:89:9F");
-				} catch (RemoteException e1) {
-					Log.e(TAG, "Could not manually connect", e1);
-				}
-				refreshDeviceList();
-				break;
+				case R.id.huawei:
+					try {
+						mBeddernetService.manualConnect("88:E3:AB:C5:89:9F");
+					} catch (RemoteException e1) {
+						Log.e(TAG, "Could not manually connect", e1);
+					}
+					refreshDeviceList();
+					break;
+
+				case R.id.recVoice:
+					/*MediaRecorder recorder = new MediaRecorder();
+					recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+					recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+					recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+					recorder.setOutputFile(path);
+					try {
+						recorder.prepare();
+					} catch (IOException e) {
+						Log.e(TAG, "Fehler beim Vorbereiten zum Aufnehmen des sounds", e);
+						e.printStackTrace();
+					}
+					recorder.start();*/
+					//itu.beddernet.recordSound.AudioRecordTest soundTest;
+					//soundTest.startRecording();
+					startActivity(new Intent(getApplicationContext(), recordActivity.class));
 			}
 		}
 	};
@@ -399,7 +429,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		}
 	};
 
-	@SuppressWarnings("unused") 
+	@SuppressWarnings("unused")
 	private void sendMulticast(String[] addresses, byte[] appMessage) {
 		try {
 			mBeddernetService.sendMulticast(addresses, null, appMessage,
@@ -409,15 +439,16 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			e.printStackTrace();
 		}
 	}
-	private void sendMessage(String address,String message) {
+
+	private void sendMessage(String address, String message) {
 		Log.i(TAG,
 				"BedderTestPlatform: DeviceList clicked, sending message to: "
 						+ address);
 		outputTextView.append("Sending message to " + address + "\n");
 		try {
 			//byte[] message = "---Hello from BedderTestPlatform".getBytes();
-			byte[] messageBegin="-".getBytes();
-			byte[] realMessage=message.getBytes();
+			byte[] messageBegin = "-".getBytes();
+			byte[] realMessage = message.getBytes();
 			// create a messageBegin array that is the size of the two arrays
 			byte[] destination = new byte[messageBegin.length + realMessage.length];
 
@@ -435,16 +466,17 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			e.printStackTrace();
 		}
 	}
+
 	private void sendMessage(String address) {
 		Log.i(TAG,
 				"BedderTestPlatform: DeviceList clicked, sending message to: "
 						+ address);
 		outputTextView.append("Sending message to " + address + "\n");
 		try {
-			inputText=(EditText)findViewById(R.id.txtInput);
+			inputText = (EditText) findViewById(R.id.txtInput);
 			//byte[] message = "---Hello from BedderTestPlatform".getBytes();
-			byte[] messageBegin="-".getBytes();
-			byte[] realMessage=inputText.getText().toString().getBytes();
+			byte[] messageBegin = "-".getBytes();
+			byte[] realMessage = inputText.getText().toString().getBytes();
 			// create a messageBegin array that is the size of the two arrays
 			byte[] destination = new byte[messageBegin.length + realMessage.length];
 
@@ -477,12 +509,25 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		// outputTextView.append("Sending file to " + address + "\n");
 		InputStream input = null;
+		File file = new File(mFileNameToSend);
+		FileInputStream fileInputStream = null;
 		try {
-			input = activity.getResources().openRawResource(R.raw.audio);
+			fileInputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			Log.e(TAG, "Couldn't open path to record sound", e);
+			e.printStackTrace();
+		}
+		try {
+			if (!sendAudioFile) {
+				input = activity.getResources().openRawResource(R.raw.walterminion);
+			} else if (sendAudioFile) {
+				//input = activity.getResources().openRawResource();
+
+				input = fileInputStream;
+			}
 		} catch (NotFoundException e2) {
 			Log.e(TAG, "Couldn't open resource", e2);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Log.e(TAG, "Could open resource. The target device may have not opened Beddernet");
 		}
 		byte[] buffer = new byte[bufferSize];
@@ -490,9 +535,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		try {
 			long startTime = System.currentTimeMillis();
 			while (input.read(buffer, 1, buffer.length - 1) != -1) {
-				try {mBeddernetService.sendUnicast(address, null, buffer,
-						applicationIdentifier);}
-				catch (Exception e) {
+				try {
+					mBeddernetService.sendUnicast(address, null, buffer,
+							applicationIdentifier);
+				} catch (Exception e) {
 					Log.e(TAG, "Could open resource. The target device may have not opened Beddernet");
 				}
 			}
@@ -505,7 +551,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 					+ (endTime - startTime) + " milliseconds");
 			Log.i(TAG, result);
 			// outputTextView.append(result);
-			byte[] testEnd = new byte[] { TEST_END };
+			byte[] testEnd = new byte[]{TEST_END};
 			mBeddernetService.sendUnicast(address, null, testEnd,
 					applicationIdentifier);
 		} catch (Exception e) {
@@ -532,8 +578,13 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		}
 	}
 
+	/*public void onStart(){
+		// Pfad, wo die der Record gespeichert ist
+		Log.i(TAG,"OnStart wurde durchgeführt");
+
+	}*/
 	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
+									ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 
 		menu.add(0, CONTEXT_MENU_SEND_MESSAGE, 0, "Send Message");
@@ -541,7 +592,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		menu.add(0, CONTEXT_MENU_SEND_FILE_DUPLEX, 0, "Send and receive file");
 		menu.add(0, CONTEXT_MENU_SEND_RTT, 0, "Send ping");
 		menu.add(0, CONTEXT_MENU_VIEW_SERVICES, 0, "View services");
-		menu.add(0, CONTECT_MENU_DISCONNECT, 0, "Disconnect");
+		menu.add(0, CONTEXT_MENU_DISCONNECT, 0, "Disconnect");
+		menu.add(0, CONTEXT_MENU_SEND_RECORDED_FILE, 0, "Send recorded File");
 	}
 
 	public boolean onContextItemSelected(MenuItem item) {
@@ -554,65 +606,70 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			// the status
 		}
 		switch (item.getItemId()) {
-		case CONTEXT_MENU_SEND_MESSAGE:
-			sendMessage(selectedAddress);
-			Log.i(TAG, "Trying to send message to : " + selectedAddress + "?");
-			return true;
-		case CONTEXT_MENU_SEND_FILE_DUPLEX:
-			new DuplexFileTest(this).execute(selectedAddress, null, null);
-			Log.i(TAG, "Trying to send and receive message : "
-					+ selectedAddress + "?");
-			return true;
-		case CONTECT_MENU_DISCONNECT:
-			try {
-				sendMessage(selectedAddress,"The connection was closed from the other side");
-				mBeddernetService.manualDisconnect(selectedAddress);
-			} catch (RemoteException e) {
-				Log.e(TAG, "Could not manually disconnect", e);
-				e.printStackTrace();
-			}
-			refreshDeviceList();
-			return true;
-		case CONTEXT_MENU_SEND_FILE:
-			if(selectedAddress!=""|selectedAddress!=null)
+			case CONTEXT_MENU_SEND_MESSAGE:
+				sendMessage(selectedAddress);
+				Log.i(TAG, "Trying to send message to : " + selectedAddress + "?");
+				return true;
+			case CONTEXT_MENU_SEND_FILE_DUPLEX:
+				new DuplexFileTest(this).execute(selectedAddress, null, null);
+				Log.i(TAG, "Trying to send and receive message : "
+						+ selectedAddress + "?");
+				return true;
+			case CONTEXT_MENU_DISCONNECT:
+				try {
+					sendMessage(selectedAddress, "The connection was closed from the other side");
+					mBeddernetService.manualDisconnect(selectedAddress);
+				} catch (RemoteException e) {
+					Log.e(TAG, "Could not manually disconnect", e);
+					e.printStackTrace();
+				}
+				refreshDeviceList();
+				return true;
+
+			case CONTEXT_MENU_SEND_FILE:
+				if (selectedAddress != "" | selectedAddress != null)
+					sendFile(selectedAddress);
+				return true;
+			case CONTEXT_MENU_SEND_RTT:
+				sendRTT(selectedAddress);
+				return true;
+			case CONTEXT_MENU_VIEW_SERVICES:
+				try {
+					long[] hashes = mBeddernetService
+							.getAllUAIHOnDevice(selectedAddress);
+					StringBuilder sb = new StringBuilder();
+					sb.append("Service hashes on devive:\n");
+					for (long l : hashes) {
+						sb.append(l);
+						sb.append("\n");
+					}
+					if (hashes != null) {
+						Toast.makeText(
+								this,
+								"Number of hashes: " + hashes.length + " "
+										+ sb.toString(), Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(this, "Hashes was null", Toast.LENGTH_LONG)
+								.show();
+					}
+					Log.i(TAG, "List of services on device called: "
+							+ sb.toString());
+				} catch (RemoteException e) {
+					Log.e(TAG, "Couldn't show all hashes", e);
+				}
+			case CONTEXT_MENU_SEND_RECORDED_FILE:
+				sendAudioFile = true;
 				sendFile(selectedAddress);
-			return true;
-		case CONTEXT_MENU_SEND_RTT:
-			sendRTT(selectedAddress);
-			return true;
-		case CONTEXT_MENU_VIEW_SERVICES:
-			try {
-				long[] hashes = mBeddernetService
-						.getAllUAIHOnDevice(selectedAddress);
-				StringBuilder sb = new StringBuilder();
-				sb.append("Service hashes on devive:\n");
-				for (long l : hashes) {
-					sb.append(l);
-					sb.append("\n");
-				}
-				if (hashes != null) {
-					Toast.makeText(
-							this,
-							"Number of hashes: " + hashes.length + " "
-									+ sb.toString(), Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(this, "Hashes was null", Toast.LENGTH_LONG)
-							.show();
-				}
-				Log.i(TAG, "List of services on device called: "
-						+ sb.toString());
-			} catch (RemoteException e) {
-				Log.e(TAG, "Couldn't show all hashes", e);
-			}
-		default:
-			return super.onContextItemSelected(item);
+				sendAudioFile = false;
+			default:
+				return super.onContextItemSelected(item);
 		}
 	}
 
-	private android.widget.CompoundButton.OnCheckedChangeListener checkBoxListener = new android.widget.CompoundButton.OnCheckedChangeListener() {
+	private CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
 
 		public void onCheckedChanged(CompoundButton buttonView,
-				boolean isChecked) {
+									 boolean isChecked) {
 			if (isChecked) {
 				try {
 					mBeddernetService.startMaintainer();
@@ -663,84 +720,99 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			// Log.d(TAG, "Message received at BedderTestPlatform");
 			switch (type) {
 
-			case FILE_MESSAGE:
-				if (!transferring) {
-					// outputTextView.append("Receiving file from: "+
-					// senderAddress+ "\n");
+				case FILE_MESSAGE:
+					if (!transferring) {
+						// outputTextView.append("Receiving file from: "+
+						// senderAddress+ "\n");
 
-					startTime = System.currentTimeMillis();
-					transferring = true;
-					try {
-						fileOut = openFileOutput("audio2.ogg", MODE_PRIVATE);
-						out = new BufferedOutputStream(fileOut);
-					} catch (IOException e) {
-						Log.e(TAG,"Error in writing to stream, closing outPut stream", e);
+						startTime = System.currentTimeMillis();
+						transferring = true;
+						try {
+							//fileOut = openFileOutput("newRecord.wav", MODE_PRIVATE);
+							out = new BufferedOutputStream(new FileOutputStream(mFileNameToPlay));
+
+						} catch (Exception e) {
+							Log.e(TAG, "Error in writing to stream, closing outPut stream", e);
+						}
+
 					}
+					transferedBytes = transferedBytes + message.length;
+					try {
+						out.write(message, 1, message.length - 1);
+					} catch (IOException e1) {
+						Log.d(TAG, "Exception in BedderTestPlatform - out.write",
+								e1);
+					}
+					break;
+				case RTT_MESSAGE:
+					// outputTextView.append("Received ping from: "+ senderAddress+
+					// "\n");
+					byte[] messageString = {RTT_MESSAGE_REPLY};
+					mBeddernetService.sendUnicast(senderAddress, null,
+							messageString, applicationIdentifier);
+					break;
+				case RTT_MESSAGE_REPLY:
+					RTTEndTime = System.currentTimeMillis();
+					RTTTime = RTTEndTime - RTTStartTime;
+					Log.i(TAG, "RTT reply received, RTT time: " + RTTTime);
+					outputTextView.append("RTT reply received, RTT time: "
+							+ RTTTime + "\n");
 
-				}
-				transferedBytes = transferedBytes + message.length;
-				try {
-					out.write(message, 1, message.length - 1);
-				} catch (IOException e1) {
-					Log.d(TAG, "Exception in BedderTestPlatform - out.write",
-							e1);
-				}
-				break;
-			case RTT_MESSAGE:
-				// outputTextView.append("Received ping from: "+ senderAddress+
-				// "\n");
-				byte[] messageString = { RTT_MESSAGE_REPLY };
-				mBeddernetService.sendUnicast(senderAddress, null,
-						messageString, applicationIdentifier);
-				break;
-			case RTT_MESSAGE_REPLY:
-				RTTEndTime = System.currentTimeMillis();
-				RTTTime = RTTEndTime - RTTStartTime;
-				Log.i(TAG, "RTT reply received, RTT time: " + RTTTime);
-				outputTextView.append("RTT reply received, RTT time: "
-						+ RTTTime + "\n");
+				case TEXT_MESSAGE:
+					refreshDeviceList();
+					String msg = new String(message, 1, message.length - 1);
+					outputTextView.append("Message received from: " + senderAddress
+							+ "Message text: " + msg + "\n");
+					Log.i(TAG, "Text message received: " + msg);
+					break;
+				case FILE_END:
+					endTime = System.currentTimeMillis();
+					transferTime = endTime - startTime;
+					kBitsPerSek = (transferedBytes / (transferTime / 1000)) * 8;
+					String result = ("Transfer over: " + transferedBytes
+							+ " bytes sent in : " + transferTime
+							+ " milliseconds. kilobits per second: "
+							+ (int) kBitsPerSek + "\n");
+					Log.i(TAG, result);
+					byte[] ackMessage = {FILE_END_ACK};
+					mBeddernetService.sendUnicast(senderAddress, null, ackMessage,
+							applicationIdentifier);
+					outputTextView.append(result);
 
-			case TEXT_MESSAGE:
-				refreshDeviceList();
-				String msg = new String(message, 1, message.length - 1);
-				outputTextView.append("Message received from: " + senderAddress
-						+ "Message text: " + msg + "\n");
-				Log.i(TAG, "Text message received: " + msg);
-				break;
-			case FILE_END:
-				endTime = System.currentTimeMillis();
-				transferTime = endTime - startTime;
-				kBitsPerSek = (transferedBytes / (transferTime / 1000)) * 8;
-				String result = ("Transfer over: " + transferedBytes
-						+ " bytes sent in : " + transferTime
-						+ " milliseconds. kilobits per second: "
-						+ (int) kBitsPerSek + "\n");
-				Log.i(TAG, result);
-				byte[] ackMessage = { FILE_END_ACK };
-				mBeddernetService.sendUnicast(senderAddress, null, ackMessage,
-						applicationIdentifier);
-				outputTextView.append(result);
-				final MediaPlayer mp = MediaPlayer.create(activity, R.raw.walterminion);
-				mp.start();
-				try {
-					out.close();
-					fileOut.close();
-				} catch (IOException e) {
-					Log.e(TAG, "Could not close outputStreams", e);
-				}
-				// Clean up
-				transferring = false;
-				transferedBytes = 0;
-				break;
-			case FILE_END_ACK:
-				fileTransferComplete();
-
-				break;
-			case FILE_FRANSFER_REQUEST:
-				sendFile(senderAddress);
-				break;
-			default:
-				break;
+					try {
+						out.close();
+						//fileOut.close();
+					} catch (IOException e) {
+						Log.e(TAG, "Could not close outputStreams", e);
+					}
+					// Clean up
+					transferring = false;
+					transferedBytes = 0;
+					//MediaPlayer mp = MediaPlayer.create(activity, R.raw.walterminion);
+					mp = new MediaPlayer();
+					try {
+						mp.setDataSource(mFileNameToPlay);
+						mp.prepare();
+					} catch (IOException e) {
+						Log.i(TAG,"Fehler beim setzen der DataSource[Methode-onCreate]");
+						e.printStackTrace();
+					}
+					outputTextView.append("Empfangene Datei wird abgespielt...");
+					mp.start();
+					while (mp.isPlaying()) {
+					}
+					mp.stop();
+					mp.release();
+					mp = null;
+					break;
+				case FILE_END_ACK:
+					fileTransferComplete();
+					break;
+				case FILE_FRANSFER_REQUEST:
+					sendFile(senderAddress);
+					break;
+				default:
+					break;
 			}
 		}
 
@@ -755,6 +827,46 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		}
 	};
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		// ATTENTION: This was auto-generated to implement the App Indexing API.
+		// See https://g.co/AppIndexing/AndroidStudio for more information.
+		client.connect();
+		Action viewAction = Action.newAction(
+				Action.TYPE_VIEW, // TODO: choose an action type.
+				"BeddernetConsole Page", // TODO: Define a title for the content shown.
+				// TODO: If you have web page content that matches this app activity's content,
+				// make sure this auto-generated web page URL is correct.
+				// Otherwise, set the URL to null.
+				Uri.parse("http://host/path"),
+				// TODO: Make sure this auto-generated app URL is correct.
+				Uri.parse("android-app://itu.beddernet/http/host/path")
+		);
+		AppIndex.AppIndexApi.start(client, viewAction);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+
+		// ATTENTION: This was auto-generated to implement the App Indexing API.
+		// See https://g.co/AppIndexing/AndroidStudio for more information.
+		Action viewAction = Action.newAction(
+				Action.TYPE_VIEW, // TODO: choose an action type.
+				"BeddernetConsole Page", // TODO: Define a title for the content shown.
+				// TODO: If you have web page content that matches this app activity's content,
+				// make sure this auto-generated web page URL is correct.
+				// Otherwise, set the URL to null.
+				Uri.parse("http://host/path"),
+				// TODO: Make sure this auto-generated app URL is correct.
+				Uri.parse("android-app://itu.beddernet/http/host/path")
+		);
+		AppIndex.AppIndexApi.end(client, viewAction);
+		client.disconnect();
+	}
 
 	private class DuplexFileTest extends AsyncTask<String, Object, Object> {
 
@@ -772,7 +884,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		private void duplexFileTransfer(String address, int fileIterations) {
 			for (int i = 0; i < fileIterations; i++) {
-				byte[] startFileMsg = { FILE_FRANSFER_REQUEST };
+				byte[] startFileMsg = {FILE_FRANSFER_REQUEST};
 				try {
 					mBeddernetService.sendUnicast(address, null, startFileMsg,
 							applicationIdentifier);
@@ -802,4 +914,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		protected void onPostExecute() {
 		}
 	}
+	/*Voice Part, for testing it copy paste here, but for better use, create a seperate Activity*/
+
 }

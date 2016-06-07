@@ -2,5 +2,9 @@
     {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/raw/audio.ogg",
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/raw/audio.ogg"
+    },
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/raw/walterminion.wav",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/raw/walterminion.wav"
     }
 ]

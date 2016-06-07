@@ -8,10 +8,16 @@
 
 
 
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Macbook" android:text="Macbook"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Iphone" android:text="IPHONE"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wave2" android:id="@+id/wave2"></Button></TableRow>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Macbook" android:text="Macbook"></Button>
+
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wave2" android:id="@+id/wave2"></Button>
+
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/wave1" android:text="Wave1"
+			android:layout_column="2"></Button>
+	</TableRow>
 <TableRow android:id="@+id/TableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/wave1" android:text="Wave1"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HUAWEI" android:id="@+id/huawei"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/huaweip6" android:text="Huawei-P6"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Dongle4" android:text="Mr 4"></Button></TableRow>
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HUAWEI" android:id="@+id/huawei"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/huaweip6" android:text="Huawei-P6"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/recVoice" android:text="Rec_Voice"></Button></TableRow>
 
 </TableLayout>
 	
