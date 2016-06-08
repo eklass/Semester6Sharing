@@ -402,13 +402,16 @@ public class BeddernetService extends Service {
 			if (networkAddresses.length > 0) {
 				deviceList = new String[networkAddresses.length * 2];
 				int y = 0;
-				for (int i = 0; i <= networkAddresses.length; i = i + 2) {
+				//If netwrokAddresses.length is used -> only 2 devices in list!!
+				//-> DeviceList is required, to fill every device in the scatternet!!
+				for (int i = 0; i < deviceList.length; i =i ) {
 					deviceList[i] = NetworkAddress
 							.castNetworkAddressToString(networkAddresses[y]);
 					deviceList[i + 1] = router.getStatus(networkAddresses[y]);
 					Log.d(TAG, "Available devices with status requested: "
 							+ router.getStatus(networkAddresses[y]));
 					y++;
+					i=i+2;
 				}
 				networkAddresses = null;
 			}

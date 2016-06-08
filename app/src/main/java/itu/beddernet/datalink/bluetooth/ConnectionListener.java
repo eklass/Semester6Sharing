@@ -84,7 +84,7 @@ public class ConnectionListener extends Thread {
 								+ "" + "too many neigbours");
 					} else {
 						Log.d(TAG, TAG2
-								+ " : Acceped incoming connection, handling");
+								+ " : Accepted incoming connection, handling");
 						dm.handleNewIncomingConnection(conn);
 					}
 				}

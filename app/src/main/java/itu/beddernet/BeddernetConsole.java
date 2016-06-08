@@ -159,8 +159,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 		setContentView(R.layout.main);
-		Button macbookBox = (Button) findViewById(R.id.Macbook);
-		macbookBox.setOnClickListener(buttonListnener);
 		Button wave2Box = (Button) findViewById(R.id.wave2);
 		wave2Box.setOnClickListener(buttonListnener);
 		Button wave1Button = (Button) findViewById(R.id.wave1);
@@ -171,6 +169,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		huaweiP6Button.setOnClickListener(buttonListnener);
 		Button recVoiceButton = (Button) findViewById(R.id.recVoice);
 		recVoiceButton.setOnClickListener(buttonListnener);
+		Button clrTxtButton = (Button) findViewById(R.id.clrTxt);
+		clrTxtButton.setOnClickListener(buttonListnener);
+		Button refDeviceButton = (Button) findViewById(R.id.refDevice);
+		refDeviceButton.setOnClickListener(buttonListnener);
 
 		//Button MSIBox = (Button) findViewById(R.id.MSI);
 		//MSIBox.setOnClickListener(buttonListnener);
@@ -193,7 +195,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		mFileNameToPlay += "/newStream.3gp";
 		mp = new MediaPlayer();
 
-		outputTextView.append("Empfangene Datei wird abgespielt...");
 		try {
 			mp.setDataSource(mFileNameToPlay);
 			mp.prepare();
@@ -246,7 +247,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				return true;
 			case MENU_DISCOVERY:
 				Log.d(TAG, "findNeighbors in BeddernetConsole");
+				outputTextView.append("Es wird 10 Sekunden lang nach sichtbaren Geräten gesucht\n");
 				new findNeighborsTask(mBeddernetService).execute(null, null, null);
+				outputTextView.append("Suche ist fertig. Bitte Liste aktualisieren\n");
+				refreshDeviceList();
 				return true;
 
 			case MENU_SERVICES:
@@ -313,7 +317,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		}
 		if (deviceList != null && deviceList.length > 0) {
 			Log.d(TAG, "getDevicesWithStatus is not null");
-			for (int i = 0; i <= deviceList.length / 2; i = i + 2) {
+			// deviceList.length/2 removed and <= to <      <--- this is crap from beddernetcreater :D
+			for (int i = 0; i < deviceList.length; i = i + 2) {
 				Log.d(TAG, "List size: " + deviceList.length);
 				mDeviceArrayAdapter
 						.add(deviceList[i] + ":" + deviceList[i + 1]);
@@ -349,14 +354,14 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private OnClickListener buttonListnener = new OnClickListener() {
 		public void onClick(View src) {
 			switch (src.getId()) {
-				case R.id.Macbook:
+				/*case R.id.Macbook:
 					try {
 						mBeddernetService.manualConnect("10:40:F3:ED:38:D5");
 					} catch (RemoteException e1) {
 						Log.e(TAG, "Could not manually connect", e1);
 					}
 					refreshDeviceList();
-					break;
+					break;*/
 
 				case R.id.wave2:
 					try {
@@ -393,22 +398,20 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 					break;
 
 				case R.id.recVoice:
-					/*MediaRecorder recorder = new MediaRecorder();
-					recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-					recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-					recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-					recorder.setOutputFile(path);
-					try {
-						recorder.prepare();
-					} catch (IOException e) {
-						Log.e(TAG, "Fehler beim Vorbereiten zum Aufnehmen des sounds", e);
-						e.printStackTrace();
-					}
-					recorder.start();*/
-					//itu.beddernet.recordSound.AudioRecordTest soundTest;
-					//soundTest.startRecording();
 					startActivity(new Intent(getApplicationContext(), recordActivity.class));
+					break;
+
+				case R.id.clrTxt:
+					outputTextView.setText("Ausgabe:\n");
+					break;
+
+				case R.id.refDevice:
+					outputTextView.append("Die Liste der verbundenen Geräte wird aktualisiert\n");
+					refreshDeviceList();
+					outputTextView.append("Aktualisierung abgeschlossen\n");
+					break;
 			}
+
 		}
 	};
 
@@ -500,7 +503,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		filesPending--;
 		if (filesPending < 0)
 			filesPending = 0;
-		outputTextView.append("File transfer over, pending: " + filesPending);
+		outputTextView.append("File transfer over, pending: " + filesPending+"\n");
 
 	}
 
@@ -797,7 +800,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 						Log.i(TAG,"Fehler beim setzen der DataSource[Methode-onCreate]");
 						e.printStackTrace();
 					}
-					outputTextView.append("Empfangene Datei wird abgespielt...");
+					outputTextView.append("Empfangene Datei wird abgespielt...\n");
 					mp.start();
 					while (mp.isPlaying()) {
 					}

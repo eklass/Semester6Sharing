@@ -171,7 +171,7 @@ public class RouteManager {
 	public long[] getAvailableDevices() {
 		// TODO: I hate vectors!
 		Vector<RoutingTableEntry> routes = routeTable.getRoutesAsVector();
-		long[] connectedDevices = new long[routes.size() - 1];
+		long[] connectedDevices = new long[routes.size()-1]; //commented routes.size-1 out
 		int j = 0; // index of connectedDevices
 		for (int i = 0; i < routes.size(); i++) {
 			long dest = ((RoutingTableEntry) routes.elementAt(i))
@@ -434,7 +434,7 @@ public class RouteManager {
 	 * Sends the supplied routes to all neighbors, used to send incremental
 	 * updates as well as immediate changes
 	 * 
-	 * @param Vector
+	 * @param routes
 	 *            routes The vector of RoutingTableEntry objects to be sent
 	 */
 	public void BroadcastRouteTableMessageInstant(

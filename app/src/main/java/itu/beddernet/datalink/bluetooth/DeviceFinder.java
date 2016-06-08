@@ -137,6 +137,11 @@ public class DeviceFinder implements Runnable {
 			this.devices = devices;
 		}
 
+
+		/*1. Komsicherweise abbruch nach einem Fehlversuch, obwohl mehrere Geräte zu finden sind.
+		* Wahrscheinlich liegt es am Garbagecollector der unten aufgerufen wird
+		* 2. Verbindung checken, warum man keine Nachricht schicken kann
+		* */
 		public void run() {
 
 			// Done sequentially as multithreaded version 
@@ -154,8 +159,9 @@ public class DeviceFinder implements Runnable {
 								"Trying to established connection to device:"
 										+ device.getAddress());
 						try {
+							// Try insecure Connection
 							socket = device
-									.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
+									.createInsecureRfcommSocketToServiceRecord(BT_NETWORK_UUID);
 						} catch (IOException e) {
 							Log.e(TAG, "Devicefinder: could not create "
 									+ "socket to device", e);
@@ -185,9 +191,10 @@ public class DeviceFinder implements Runnable {
 						}
 					}
 				}
-				devices = null;
-				break;
+				// Why the hack, should we just find only one Device? <--- Also crap from creater :D
+				//break;
 			}
+			devices = null;
 		}
 	}
 }

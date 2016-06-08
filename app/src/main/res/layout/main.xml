@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:background="@drawable/minion">
+	android:layout_height="fill_parent"
+	android:background="@drawable/minionshout">
 	<TableLayout android:id="@+id/TableLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content"><TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
 
 
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HUAWEI" android:id="@+id/huawei"
+            android:layout_column="0"></Button>
 
-
-
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Macbook" android:text="Macbook"></Button>
-
-		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wave2" android:id="@+id/wave2"></Button>
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wave2" android:id="@+id/wave2"
+			android:layout_column="1"></Button>
 
 		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/wave1" android:text="Wave1"
 			android:layout_column="2"></Button>
+
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/huaweip6" android:text="HUAP6"
+			android:layout_column="7"></Button>
 	</TableRow>
 <TableRow android:id="@+id/TableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HUAWEI" android:id="@+id/huawei"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/huaweip6" android:text="Huawei-P6"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/recVoice" android:text="Rec_Voice"></Button></TableRow>
+	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MaintainerBox" android:text="Maintainer"
+        android:checked="false"
+		android:layout_column="0"></CheckBox>
+
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="refDevice"
+		android:id="@+id/refDevice"
+		android:layout_column="1"
+		android:background="#8091F2" />
+
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="CLRTXT"
+		android:id="@+id/clrTxt"
+		android:layout_column="2"
+		android:allowUndo="true"
+		android:background="#80F2A8" />
+
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/recVoice" android:text="Voice"
+		android:layout_column="7"
+		android:contextClickable="false"
+		android:background="#FF7D92"></Button>
+</TableRow>
 
 </TableLayout>
-	
-	
-	
 
-
-
-<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MaintainerBox" android:text="Maintainer"
-	android:checked="false"></CheckBox>
 
 	<EditText
 		android:layout_width="match_parent"
