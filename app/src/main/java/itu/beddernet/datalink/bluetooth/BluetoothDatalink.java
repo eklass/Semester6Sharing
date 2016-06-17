@@ -224,7 +224,7 @@ public class BluetoothDatalink implements DatalinkInterface {
 		try {
 			//socket = other.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
 			/* Try an unsecure connection to avoid the user pin*/
-			socket = other.createInsecureRfcommSocketToServiceRecord(BT_NETWORK_UUID);
+			socket = other.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
 		} catch (IOException e) {
 			Log.e(TAG, "Datalink: could not create socket to device", e);
 		} 
