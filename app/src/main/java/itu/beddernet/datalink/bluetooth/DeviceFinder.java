@@ -29,6 +29,7 @@ public class DeviceFinder implements Runnable {
 	public boolean searchRunning = false;
 	private long lastDiscoveryTime = 0;
 	byte b[];
+	public Vector<BluetoothDevice> globalDevices;
 
 	private String TAG = itu.beddernet.common.BeddernetInfo.TAG;
 	public static UUID BT_NETWORK_UUID = itu.beddernet.common.BeddernetInfo.BT_NETWORK_UUID;
@@ -135,6 +136,8 @@ public class DeviceFinder implements Runnable {
 
 		public connectThread(Vector<BluetoothDevice> devices) {
 			this.devices = devices;
+			//# Edit: add to global device-List -> for getting the name of the devices in BetternetConsole
+			globalDevices = devices;
 		}
 
 
@@ -157,7 +160,7 @@ public class DeviceFinder implements Runnable {
 						// try {
 						Log.d(TAG,
 								"Trying to established connection to device:"
-										+ device.getAddress());
+										+ device.getAddress()+":"+device.getName());
 						try {
 							// Try insecure Connection
 							socket = device
@@ -172,6 +175,7 @@ public class DeviceFinder implements Runnable {
 									"Connection established to "
 											+ device.getAddress());
 							newConnections.addElement(socket);
+							// Hier Refresh Device aufrufen
 						} catch (Exception e) {
 							Log.e(TAG, "Datalink: could not connect to device",
 									e);
@@ -197,4 +201,20 @@ public class DeviceFinder implements Runnable {
 			devices = null;
 		}
 	}
+	/**
+	 * Gets the devicename from a given address
+	 * written by Erich Klassen (22.06.15)
+	 *
+	 * @return deviceName
+	 * */
+		public String getDeviceName(String address){
+			if(globalDevices!=null){
+				for (BluetoothDevice device : globalDevices) {
+					if (device.getAddress().toLowerCase().equals(address)){
+						return device.getName();
+					}
+				}
+			}
+		return "";
+		}
 }

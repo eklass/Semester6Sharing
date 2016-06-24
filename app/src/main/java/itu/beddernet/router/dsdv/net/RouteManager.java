@@ -774,5 +774,7 @@ public class RouteManager {
 		return deviceArray;
 	}
 
-
+	public String getDeviceName(String address){
+		return datalink.getDeviceName(address);
+	}
 }

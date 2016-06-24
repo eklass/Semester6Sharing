@@ -135,5 +135,5 @@ interface IBeddernetService {
     */	
 	long[] getAllUAIHOnDevice(String UAIH);
     
-    
+    String getDeviceName(String address);
 }

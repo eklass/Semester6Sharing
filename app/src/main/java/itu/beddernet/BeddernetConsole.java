@@ -320,8 +320,15 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			// deviceList.length/2 removed and <= to <      <--- this is crap from beddernetcreater :D
 			for (int i = 0; i < deviceList.length; i = i + 2) {
 				Log.d(TAG, "List size: " + deviceList.length);
-				mDeviceArrayAdapter
-						.add(deviceList[i] + ":" + deviceList[i + 1]);
+
+				//#Edit Change the Macadress to Devicename
+				//mDeviceArrayAdapter.add(deviceList[i] + ":" + deviceList[i + 1]);
+				try {
+					mDeviceArrayAdapter.add(deviceList[i]+":"+mBeddernetService.getDeviceName(deviceList[i])+":"+deviceList[i + 1]);
+				} catch (RemoteException e) {
+					Log.e(TAG,"Error to get DeviceName");
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -406,9 +413,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 					break;
 
 				case R.id.refDevice:
-					outputTextView.append("Die Liste der verbundenen Geräte wird aktualisiert\n");
+					outputTextView.append("Die Liste der verbundenen Geräte wurde aktualisiert\n");
 					refreshDeviceList();
-					outputTextView.append("Aktualisierung abgeschlossen\n");
 					break;
 			}
 
@@ -417,6 +423,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 	/*
 	* This method will be called, if someone clicks on a device to communicate
+	* OnItemClicklistener nutzt den substring um auf die Adresse zu kommen (eigentlich clever)
 	* */
 	private OnItemClickListener mListListener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
@@ -919,4 +926,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	}
 	/*Voice Part, for testing it copy paste here, but for better use, create a seperate Activity*/
 
+	public TextView getOutputTextView() {
+		return outputTextView;
+	}
 }

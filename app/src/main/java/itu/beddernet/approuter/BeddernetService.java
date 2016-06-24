@@ -395,6 +395,11 @@ public class BeddernetService extends Service {
 					.castNetworkAddressToLong(deviceAddress));
 		}
 
+		@Override
+		public String getDeviceName(String address) throws RemoteException {
+			return router.getDeviceName(address);
+		}
+
 		public String[] getDevicesWithStatus() throws RemoteException {
 			Log.d(TAG, "Available devices with status requested");
 			long[] networkAddresses = router.getAvailableDevices();
@@ -477,4 +482,7 @@ public class BeddernetService extends Service {
 			stopSelf();
 		}
 	}
+	//public String getDeviceName(String address){
+//		return router.getDeviceName(address);
+	//}
 }

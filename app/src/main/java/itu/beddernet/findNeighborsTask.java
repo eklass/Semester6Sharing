@@ -17,6 +17,7 @@ public class findNeighborsTask extends AsyncTask<Object, Object, Object>{
 	protected Object doInBackground(Object... params) {
 		try {
 			service.findNeighbors();
+			Log.e(TAG,"Suche ist fertig");
 		} catch (RemoteException e) {
 			Log.e(TAG, "Could not request device discovery");
 		}

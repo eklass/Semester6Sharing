@@ -363,4 +363,10 @@ public class BluetoothDatalink implements DatalinkInterface {
 		return dm.numberOfNeighbours();
 	}
 
+	public String getDeviceName(String address){
+		//#Edit: Use btAdapter instead of DeviceFinder
+		address=address.toUpperCase();
+		BluetoothDevice other = btAdapter.getRemoteDevice(address);
+		return other.getName();
+	}
 }

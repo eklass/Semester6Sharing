@@ -16,6 +16,7 @@ public class RoutingTableEntry {
 	private long routeCreationTime;
 	private boolean routeChanged = false;
 	private ArrayList<Long> serviceList;
+	private String deviceName;
 
 	/**
 	 * Class constructor

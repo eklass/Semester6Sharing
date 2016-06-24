@@ -184,5 +184,6 @@ public interface RouterInterface {
 	 * @return true or false
 	 */
 	boolean getApplicationSupport(long deviceAddress, long UAIH);
+	public String getDeviceName(String address);
 
 }

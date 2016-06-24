@@ -227,6 +227,16 @@ reply.writeNoException();
 reply.writeLongArray(_result);
 return true;
 }
+case TRANSACTION_getDeviceName:
+{
+data.enforceInterface(DESCRIPTOR);
+java.lang.String _arg0;
+_arg0 = data.readString();
+java.lang.String _result = this.getDeviceName(_arg0);
+reply.writeNoException();
+reply.writeString(_result);
+return true;
+}
 }
 return super.onTransact(code, data, reply, flags);
 }
@@ -614,6 +624,24 @@ _data.recycle();
 }
 return _result;
 }
+@Override public java.lang.String getDeviceName(java.lang.String address) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+java.lang.String _result;
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeString(address);
+mRemote.transact(Stub.TRANSACTION_getDeviceName, _data, _reply, 0);
+_reply.readException();
+_result = _reply.readString();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+return _result;
+}
 }
 static final int TRANSACTION_registerCallback = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
 static final int TRANSACTION_unregisterCallback = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
@@ -633,6 +661,7 @@ static final int TRANSACTION_getNeighbours = (android.os.IBinder.FIRST_CALL_TRAN
 static final int TRANSACTION_disableBluetooth = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
 static final int TRANSACTION_getDevicesWithStatus = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
 static final int TRANSACTION_getAllUAIHOnDevice = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
+static final int TRANSACTION_getDeviceName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
 }
 /**
      * Often you want to allow a service to call back to its clients.
@@ -724,4 +753,5 @@ public java.lang.String[] getDevicesWithStatus() throws android.os.RemoteExcepti
     *Returns all service hashes on a specific device. 
     */
 public long[] getAllUAIHOnDevice(java.lang.String UAIH) throws android.os.RemoteException;
+public java.lang.String getDeviceName(java.lang.String address) throws android.os.RemoteException;
 }

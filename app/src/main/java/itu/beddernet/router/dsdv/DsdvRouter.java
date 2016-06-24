@@ -235,5 +235,7 @@ public class DsdvRouter implements RouterInterface, AppRouterInterface {
 		return rtMgr.getAllUAIHOnDevice(UAIH);
 	}
 	
-
+	public String getDeviceName(String address){
+		return rtMgr.getDeviceName(address);
+	}
 }
