@@ -27,6 +27,8 @@ public class DiscoveryReceiver extends BroadcastReceiver {
 		Log.i(TAG, TAG2 + ": onReceive called");
 		String action = intent.getAction();
 
+
+
 		// When discovery finds a device
 		if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 			// Get the BluetoothDevice object from the Intent

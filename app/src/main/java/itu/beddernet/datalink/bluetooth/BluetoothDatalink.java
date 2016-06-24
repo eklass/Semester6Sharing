@@ -224,7 +224,7 @@ public class BluetoothDatalink implements DatalinkInterface {
 		try {
 			//socket = other.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
 			/* Try an unsecure connection to avoid the user pin*/
-			socket = other.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
+			socket = other.createInsecureRfcommSocketToServiceRecord(BT_NETWORK_UUID);
 		} catch (IOException e) {
 			Log.e(TAG, "Datalink: could not create socket to device", e);
 		} 
@@ -284,8 +284,9 @@ public class BluetoothDatalink implements DatalinkInterface {
 			Thread.sleep(5000);
 			btDevice = btAdapter.getRemoteDevice(NetworkAddress
 					.castNetworkAddressToString(dest));
+			//#Edit to insecure connection
 			BluetoothSocket conn = btDevice
-					.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
+					.createInsecureRfcommSocketToServiceRecord(BT_NETWORK_UUID);
 			Vector<BluetoothSocket> conns = new Vector<BluetoothSocket>();
 			conns.addElement(conn);
 			dm.handleNewlyDiscoveredConnections(conns);
@@ -315,8 +316,9 @@ public class BluetoothDatalink implements DatalinkInterface {
 	public void connect(long dest) {
 		try {
 			String addr = NetworkAddress.castNetworkAddressToString(dest);
+			//#Edit to insecure connection
 			BluetoothSocket conn = btAdapter.getRemoteDevice(addr)
-					.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
+					.createInsecureRfcommSocketToServiceRecord(BT_NETWORK_UUID);
 			conn.connect();
 			Log.i(TAG,
 					"BluetoothDatalink : connect called, will send to handle new connection");

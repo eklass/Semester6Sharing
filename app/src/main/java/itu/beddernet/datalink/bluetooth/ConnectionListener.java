@@ -121,7 +121,8 @@ public class ConnectionListener extends Thread {
 	private void openServerSocket() {
 		Log.d(TAG, "Open server socket");
 		try {
-			serverSocket = btAdapter.listenUsingRfcommWithServiceRecord(
+			// #Edit to Inscureconnection
+			serverSocket = btAdapter.listenUsingInsecureRfcommWithServiceRecord(
 					BeddernetInfo.SDP_RECORD_NAME, BeddernetInfo.BT_NETWORK_UUID);
 		} catch (IOException e) {
 			Log.e(TAG, "Could not open serverSocket: " + e.getMessage());
