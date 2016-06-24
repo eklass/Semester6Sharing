@@ -20,6 +20,7 @@ import android.util.Log;
 public class DeviceVO implements Runnable {
 
 	private long btAddress;
+	boolean firstGo=true;
 	private BluetoothSocket conn;
 	private String TAG = itu.beddernet.common.BeddernetInfo.TAG;
 	private InputStream inputStream;
@@ -92,12 +93,18 @@ public class DeviceVO implements Runnable {
 			int bytesRead = 0;
 			byte type;
 			try {
-				//size of incoming bytearray always preceeds array
+				//size of incoming bytearray always preceeds array Change #1
 				bytesRead = din.readInt();
-				if (bytesRead<=0) {
-					Log.e(TAG, "Array is negative!!!!! Not so good!");
+				Log.e(TAG,"BytesRead hat den Wert"+bytesRead);
+				if (firstGo && bytesRead<=0) {
+					Log.e(TAG, "First Byte in Array is negative!!!!! Not so good!");
+					// Change #2
+					//deviceManager.handleBrokenConnection(btAddress);
+					// Change #3
+					//firstGo=false;
 					break;
 				}
+				firstGo=false;
 				message = new byte[bytesRead];
 				din.readFully(message);
 				type = message[0];
