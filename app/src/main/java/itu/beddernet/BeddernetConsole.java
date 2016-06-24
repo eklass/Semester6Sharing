@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -111,6 +112,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	ServiceConnection sc = this;
 	public TextView outputTextView;
 	private int filesPending;
+	//#Edit: A list with all Devices which are connected (for reducing the mDeviceArrayAdapter-delete Mac-Adress from output)
+//	public ArrayList<String> deviceListWithConnectedDevices = new ArrayList<String>();
 	/**
 	 * ATTENTION: This was auto-generated to implement the App Indexing API.
 	 * See https://g.co/AppIndexing/AndroidStudio for more information.

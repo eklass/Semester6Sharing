@@ -29,7 +29,7 @@ import android.bluetooth.BluetoothSocket;
  */
 public class BluetoothDatalink implements DatalinkInterface {
 	private BluetoothDevice btDevice;
-	private BluetoothAdapter btAdapter;
+	public BluetoothAdapter btAdapter;
 	private long btAdd;
 	private DeviceManager dm;
 	private DeviceFinder df;
@@ -90,6 +90,15 @@ public class BluetoothDatalink implements DatalinkInterface {
 				}
 			} else {
 				btStatus(true); // It on. All is good good good
+				//#Edit Start Discovery when the app is on
+				Intent discoverableIntent = new Intent(
+						BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+				discoverableIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				// Changed the value from 300 to 0 (always on)
+				discoverableIntent.putExtra(
+						BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
+				BeddernetService.getBeddernetInstance().startActivity(
+						discoverableIntent);
 			}
 		} catch (Exception e) {
 			Log.d(TAG, "Problem with starting bluetooth default adapter"

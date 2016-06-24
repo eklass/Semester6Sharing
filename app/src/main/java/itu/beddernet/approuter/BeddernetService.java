@@ -358,8 +358,9 @@ public class BeddernetService extends Service {
 				Intent discoverableIntent = new Intent(
 						BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
 				discoverableIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				// Changed the value from 300 to 0 (always on)
 				discoverableIntent.putExtra(
-						BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+						BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
 				BeddernetService.getBeddernetInstance().startActivity(
 						discoverableIntent);
 			}
