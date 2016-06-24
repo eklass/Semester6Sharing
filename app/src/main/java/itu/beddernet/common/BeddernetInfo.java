@@ -11,8 +11,8 @@ import java.util.UUID;
 public final class BeddernetInfo {
 	public static final String TAG = "Beddernet";
 	//Unique UUID String for BEDnet
-	public static final String UUID_STRING = "00001105-0000-1000-8000-00805F9B34FB";//"fa87c0d0-afac-11de-8a39-0800200c9a66";
-	
+	//public static final String UUID_STRING = "00001105-0000-1000-8000-00805F9B34FB";//"fa87c0d0-afac-11de-8a39-0800200c9a66";
+	public static final String UUID_STRING = "FA87C0D0-AFAC-11DE-8A39-0800200C9A66";//"fa87c0d0-afac-11de-8a39-0800200c9a66";
 	public static UUID BT_NETWORK_UUID = UUID
 	.fromString(UUID_STRING);
 
