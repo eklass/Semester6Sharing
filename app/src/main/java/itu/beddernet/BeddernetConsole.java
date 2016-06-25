@@ -1,3 +1,5 @@
+//Sammlung an Links: http://stackoverflow.com/questions/23945171/android-app-bluetooth-connection-without-pairing
+//http://stackoverflow.com/questions/13079645/android-how-to-wait-asynctask-to-finish-in-mainthread
 package itu.beddernet;
 
 import itu.beddernet.approuter.IBeddernetService;
@@ -5,6 +7,7 @@ import itu.beddernet.approuter.IBeddernetServiceCallback;
 import itu.beddernet.common.BeddernetInfo;
 import itu.beddernet.common.NetworkAddress;
 import itu.beddernet.recordSound.recordActivity;
+import itu.beddernet.router.Message;
 import itu.beddernet.router.dsdv.info.ConfigInfo;
 
 import java.io.BufferedOutputStream;
@@ -15,6 +18,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.LogRecord;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -29,6 +36,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -60,6 +68,22 @@ import com.google.android.gms.common.api.GoogleApiClient;
 // TODO:3. GUI anpassen, dass man beliebigen Text verschicken kann
 
 public class BeddernetConsole extends Activity implements ServiceConnection {
+
+	Handler myHandler = new Handler() {
+		@Override
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+				case 0:
+					Log.e(TAG,"Ich wurde gerufen.Anscheinend ist der Thread fertig.");
+					refreshDeviceList();
+					// calling to this function from other pleaces
+					// The notice call method of doing things
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
 	private EditText inputText;
 
@@ -102,7 +126,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private String TAG = BeddernetInfo.TAG;
 	private IBeddernetService mBeddernetService;
 	private Activity activity;
-	private ArrayAdapter<String> mDeviceArrayAdapter;
+	public ArrayAdapter<String> mDeviceArrayAdapter;
 	private ListView mDeviceView;
 	public static String applicationIdentifier = "BeddernetConsole";
 	public static long applicationIdentifierHash = applicationIdentifier
@@ -162,14 +186,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 		setContentView(R.layout.main);
-		Button wave2Box = (Button) findViewById(R.id.wave2);
-		wave2Box.setOnClickListener(buttonListnener);
-		Button wave1Button = (Button) findViewById(R.id.wave1);
-		wave1Button.setOnClickListener(buttonListnener);
-		Button huaweiButton = (Button) findViewById(R.id.huawei);
-		huaweiButton.setOnClickListener(buttonListnener);
-		Button huaweiP6Button = (Button) findViewById(R.id.huaweip6);
-		huaweiP6Button.setOnClickListener(buttonListnener);
 		Button recVoiceButton = (Button) findViewById(R.id.recVoice);
 		recVoiceButton.setOnClickListener(buttonListnener);
 		Button clrTxtButton = (Button) findViewById(R.id.clrTxt);
@@ -220,6 +236,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		menu.add(0, MENU_BLUETOOTH_OFF, 0, "Bluetooth off");
 		menu.add(0, MENU_BEDNET_OFF, 0, "Bednet off");
 		menu.add(0, MENU_SHAREAPP, 0, "Share app");
+		searchForDevices();
 		return true;
 	}
 
@@ -249,11 +266,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				}
 				return true;
 			case MENU_DISCOVERY:
-				Log.d(TAG, "findNeighbors in BeddernetConsole");
-				outputTextView.append("Es wird 10 Sekunden lang nach sichtbaren Geräten gesucht\n");
-				new findNeighborsTask(mBeddernetService).execute(null, null, null);
-				outputTextView.append("Suche ist fertig. Bitte Liste aktualisieren\n");
-				refreshDeviceList();
+				searchForDevices();
 				return true;
 
 			case MENU_SERVICES:
@@ -304,6 +317,14 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		}
 		return false;
+	}
+
+	public void searchForDevices() {
+		Log.d(TAG, "findNeighbors in BeddernetConsole");
+		outputTextView.append("Es wird 10 Sekunden lang nach sichtbaren Geräten gesucht\n");
+		new findNeighborsTask(mBeddernetService,myHandler).execute(null, null, null);
+		Log.d(TAG, "Es wurde erfolgreich nach Geräten gesucht");
+
 	}
 
 	public void onServiceDisconnected(ComponentName name) {
@@ -364,49 +385,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private OnClickListener buttonListnener = new OnClickListener() {
 		public void onClick(View src) {
 			switch (src.getId()) {
-				/*case R.id.Macbook:
-					try {
-						mBeddernetService.manualConnect("10:40:F3:ED:38:D5");
-					} catch (RemoteException e1) {
-						Log.e(TAG, "Could not manually connect", e1);
-					}
-					refreshDeviceList();
-					break;*/
-
-				case R.id.wave2:
-					try {
-						mBeddernetService.manualConnect("A0:75:91:58:5B:6D");
-					} catch (RemoteException e1) {
-						Log.e(TAG, "Could not manually connect", e1);
-					}
-					refreshDeviceList();
-					break;
-				case R.id.wave1:
-					try {
-						mBeddernetService.manualConnect("E8:E5:D6:49:E0:68");
-					} catch (RemoteException e1) {
-						Log.e(TAG, "Could not manually connect", e1);
-					}
-					refreshDeviceList();
-					break;
-				case R.id.huaweip6:
-					try {
-						mBeddernetService.manualConnect("24:69:A5:94:D8:96");
-					} catch (RemoteException e1) {
-						Log.e(TAG, "Could not manually connect", e1);
-					}
-					refreshDeviceList();
-					break;
-
-				case R.id.huawei:
-					try {
-						mBeddernetService.manualConnect("88:E3:AB:C5:89:9F");
-					} catch (RemoteException e1) {
-						Log.e(TAG, "Could not manually connect", e1);
-					}
-					refreshDeviceList();
-					break;
-
 				case R.id.recVoice:
 					startActivity(new Intent(getApplicationContext(), recordActivity.class));
 					break;
@@ -859,6 +837,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				Uri.parse("android-app://itu.beddernet/http/host/path")
 		);
 		AppIndex.AppIndexApi.start(client, viewAction);
+
 	}
 
 	@Override
