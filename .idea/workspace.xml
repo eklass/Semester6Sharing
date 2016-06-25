@@ -19,43 +19,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfc08e18-8e30-4f96-88ff-9cdfad0aa9da" name="Default" comment="Protokoll wurde korriegiert:&#10;Es werden mit Find Devices alle Geräte angezeigt die in der Umgebung sind (bzw. die App offen haben)&#10;Begrenzung von 2 Geräten aufgehoben!&#10;AD-Hoc wurde erfolgreich getestet!&#10;Ausgabetext bei Finddevices hinzugefügt (Debugzwecke)&#10;3 neue Button:&#10;refDevice: mach ein Refresh der Geräte (zugänglicher als über das Menü)&#10;CLRTXT-bereinigt die Ausgabe in der App&#10;Voice button Farbe verändert.&#10;&#10;Next Step: Verbesserung der Connection (Problem 1xanmelden, 1xabmelden, 1x anmelden -&gt; Erfolgreiches Pairing)&#10;Das gilt es in dem nächsten Commit zu verbessern&#10;(BeddernetService, BluetoothService haben noch komische Fehlermeldungen)">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$DuplexFileTest.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$DuplexFileTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$raw.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$raw.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/findNeighborsTask.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/findNeighborsTask.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/debug_fe1e035c0497709b6055ce90da252d2ca07f36f1.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/debug_fe1e035c0497709b6055ce90da252d2ca07f36f1.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/drivingCarWithCat.gif" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/itu/beddernet/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/itu/beddernet/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/main.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java" afterPath="$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/itu/beddernet/findNeighborsTask.java" afterPath="$PROJECT_DIR$/app/src/main/java/itu/beddernet/findNeighborsTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/main.xml" />
     </list>
     <ignored path="Beddernet.iws" />
@@ -164,8 +129,8 @@
       <file leaf-file-name="BeddernetConsole.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4164306">
-              <caret line="324" column="85" selection-start-line="324" selection-start-column="85" selection-end-line="324" selection-end-column="85" />
+            <state vertical-scroll-proportion="0.49008498">
+              <caret line="187" column="34" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
               <folding>
                 <element signature="e#0#30539#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -187,6 +152,13 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="drivingCarWithCat.gif" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/drivingCarWithCat.gif">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="findNeighborsTask.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/findNeighborsTask.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -201,12 +173,12 @@
       </file>
       <file leaf-file-name="main.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
-          <provider selected="true" editor-type-id="android-designer">
+          <provider editor-type-id="android-designer">
             <state />
           </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.85046726">
+              <caret line="11" column="108" selection-start-line="11" selection-start-column="104" selection-end-line="11" selection-end-column="108" />
               <folding />
             </state>
           </provider>
@@ -1997,8 +1969,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/itu/beddernet/datalink/bluetooth/ConnectionListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/itu/beddernet/approuter/BeddernetService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/itu/beddernet/datalink/bluetooth/BluetoothDatalink.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/itu/beddernet/findNeighborsTask.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java" />
       </list>
     </option>
@@ -2266,6 +2238,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Beddernet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Beddernet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2504,21 +2506,22 @@
     <property name="extract.method.default.visibility" value="public" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
+      <recent name="$PROJECT_DIR$/app/src/main/aidl/itu/beddernet/approuter" />
+      <recent name="$PROJECT_DIR$/app/src/main/java/itu/beddernet" />
+    </key>
+    <key name="android.template.packageName">
+      <recent name="itu.beddernet.recordSound" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
       <recent name="$PROJECT_DIR$/app/src/main/aidl/itu/beddernet/approuter" />
       <recent name="$PROJECT_DIR$/app/src/main/java/itu/beddernet/approuter" />
-    </key>
-    <key name="android.template.packageName">
-      <recent name="itu.beddernet.recordSound" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
-      <recent name="$PROJECT_DIR$/app/src/main/aidl/itu/beddernet/approuter" />
-      <recent name="$PROJECT_DIR$/app/src/main/java/itu/beddernet" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.app">
@@ -2945,6 +2948,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3633842" sideWeight="0.43848354" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43411928" sideWeight="0.5078684" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3025751" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.4914163" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.42203146" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.4599428" order="7" side_tool="false" content_ui="tabs" />
@@ -2966,7 +2970,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994452" sideWeight="0.49713877" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3025751" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.47424892" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -3088,13 +3091,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/common/Observer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4114713">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/router/message/RouteBroadcastMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3449,17 +3445,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/app/ActivityThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -3534,10 +3519,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/drivingCarWithCat.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.85046726">
+          <caret line="11" column="108" selection-start-line="11" selection-start-column="104" selection-end-line="11" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4164306">
-          <caret line="324" column="85" selection-start-line="324" selection-start-column="85" selection-end-line="324" selection-end-column="85" />
+        <state vertical-scroll-proportion="0.49008498">
+          <caret line="187" column="34" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
           <folding>
             <element signature="e#0#30539#0" expanded="true" />
             <element signature="imports" expanded="true" />
