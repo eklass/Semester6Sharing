@@ -192,6 +192,10 @@
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.github.lzyzsd/circleprogress/1.1.0/res/drawable-hdpi-v4/ic_launcher.png"
+    },
+    {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable-hdpi-v4/abc_ic_ab_back_mtrl_am_alpha.png"
     }
