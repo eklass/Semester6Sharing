@@ -95,7 +95,7 @@ public class DeviceVO implements Runnable {
 			try {
 				//size of incoming bytearray always preceeds array Change #1
 				bytesRead = din.readInt();
-				Log.e(TAG,"BytesRead hat den Wert"+bytesRead);
+				//Log.e(TAG,"BytesRead hat den Wert"+bytesRead);
 				if (firstGo && bytesRead<=0) {
 					Log.e(TAG, "First Byte in Array is negative!!!!! Not so good!");
 					// Change #2
@@ -119,6 +119,7 @@ public class DeviceVO implements Runnable {
 			Log.d(TAG, "Device: "
 					+ NetworkAddress.castNetworkAddressToString(btAddress)
 					+ " - Message recieved in packetlistener");
+			// Here must be the refresh deviceListe
 			switch (type) {
 
 			//First byte is the control byte, datalink layer has A, B and C (65, 66, 67) 

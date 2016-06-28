@@ -1,5 +1,6 @@
-//Sammlung an Links: http://stackoverflow.com/questions/23945171/android-app-bluetooth-connection-without-pairing
-//http://stackoverflow.com/questions/13079645/android-how-to-wait-asynctask-to-finish-in-mainthread
+//Sammlung an Links: 	http://stackoverflow.com/questions/23945171/android-app-bluetooth-connection-without-pairing
+//Handler:				http://stackoverflow.com/questions/13079645/android-how-to-wait-asynctask-to-finish-in-mainthread
+//Disabling Keyboard: 	http://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
 package itu.beddernet;
 
 import itu.beddernet.approuter.IBeddernetService;
@@ -7,9 +8,7 @@ import itu.beddernet.approuter.IBeddernetServiceCallback;
 import itu.beddernet.common.BeddernetInfo;
 import itu.beddernet.common.NetworkAddress;
 import itu.beddernet.recordSound.recordActivity;
-import itu.beddernet.router.Message;
 import itu.beddernet.router.dsdv.info.ConfigInfo;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,13 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.logging.LogRecord;
-
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -40,6 +32,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -47,15 +41,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -139,8 +134,13 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	ServiceConnection sc = this;
 	public TextView outputTextView;
 	private int filesPending;
-	//#Edit: A list with all Devices which are connected (for reducing the mDeviceArrayAdapter-delete Mac-Adress from output)
-//	public ArrayList<String> deviceListWithConnectedDevices = new ArrayList<String>();
+
+	// Variables for progressbar
+	FrameLayout progressBarHolder;
+	AlphaAnimation inAnimation;
+	AlphaAnimation outAnimation;
+
+
 	/**
 	 * ATTENTION: This was auto-generated to implement the App Indexing API.
 	 * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -193,8 +193,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		recVoiceButton.setOnClickListener(buttonListnener);
 		Button clrTxtButton = (Button) findViewById(R.id.clrTxt);
 		clrTxtButton.setOnClickListener(buttonListnener);
-		Button refDeviceButton = (Button) findViewById(R.id.refDevice);
-		refDeviceButton.setOnClickListener(buttonListnener);
+		//Button refDeviceButton = (Button) findViewById(R.id.refDevice);
+		//refDeviceButton.setOnClickListener(buttonListnener);
 
 		//Button MSIBox = (Button) findViewById(R.id.MSI);
 		//MSIBox.setOnClickListener(buttonListnener);
@@ -224,11 +224,14 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			Log.i(TAG,"Fehler beim setzen der DataSource[Methode-onCreate]");
 			e.printStackTrace();
 		}
-		ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+		progressBarHolder = (FrameLayout)findViewById(R.id.progressBarHolder);
+		/*ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
 		ObjectAnimator animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
 		animation.setDuration (100000); //in milliseconds
 		animation.setInterpolator (new DecelerateInterpolator());
 		animation.start ();
+		*/
+
 		// ATTENTION: This was auto-generated to implement the App Indexing API.
 		// See https://g.co/AppIndexing/AndroidStudio for more information.
 		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -328,10 +331,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 	public void searchForDevices() {
 		Log.d(TAG, "findNeighbors in BeddernetConsole");
-		outputTextView.append("Es wird 10 Sekunden lang nach sichtbaren Geräten gesucht\n");
-		new findNeighborsTask(mBeddernetService,myHandler).execute(null, null, null);
-		Log.d(TAG, "Es wurde erfolgreich nach Geräten gesucht");
-
+		//outputTextView.append("Es wird 10 Sekunden lang nach sichtbaren Geräten gesucht\n");
+		new findNeighborsTask(mBeddernetService,myHandler,progressBarHolder,inAnimation,outAnimation).execute(null, null, null);
+		//Log.d(TAG, "Es wurde erfolgreich nach Geräten gesucht");
+		outputTextView.setMovementMethod(new ScrollingMovementMethod());
 	}
 
 	public void onServiceDisconnected(ComponentName name) {
@@ -400,10 +403,11 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 					outputTextView.setText("Ausgabe:\n");
 					break;
 
-				case R.id.refDevice:
+				/*case R.id.refDevice:
 					outputTextView.append("Die Liste der verbundenen Geräte wurde aktualisiert\n");
 					refreshDeviceList();
-					break;
+					outputTextView.setMovementMethod(new ScrollingMovementMethod());
+					break;*/
 			}
 
 		}
@@ -439,10 +443,14 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	}
 
 	private void sendMessage(String address, String message) {
+		String deviceName;
+		deviceName=getNameFromMacadress(address);
 		Log.i(TAG,
 				"BedderTestPlatform: DeviceList clicked, sending message to: "
 						+ address);
-		outputTextView.append("Sending message to " + address + "\n");
+		String toSend="<font color='#FAA987'>"+message+deviceName+" is closed"+"</font><br/>";
+		outputTextView.append(Html.fromHtml(toSend));
+		refreshDeviceList();
 		try {
 			//byte[] message = "---Hello from BedderTestPlatform".getBytes();
 			byte[] messageBegin = "-".getBytes();
@@ -463,15 +471,38 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			Log.e(TAG, "Remote exception from service, could not send message");
 			e.printStackTrace();
 		}
+		outputTextView.setMovementMethod(new ScrollingMovementMethod());
 	}
 
+
+
 	private void sendMessage(String address) {
+		String deviceName="Unknown";
+		String messageIsend;
+		if (inputText==null){
+			messageIsend="";
+		}
+		else {
+			messageIsend=inputText.getText().toString();
+		}
+		deviceName=getNameFromMacadress(address);
 		Log.i(TAG,
 				"BedderTestPlatform: DeviceList clicked, sending message to: "
 						+ address);
-		outputTextView.append("Sending message to " + address + "\n");
+		String toSend="<font color='#CFE2FA'>Me to "+deviceName+": " +messageIsend+"</font><br/>";
+		outputTextView.append(Html.fromHtml(toSend));
 		try {
 			inputText = (EditText) findViewById(R.id.txtInput);
+
+			// Disable the Keyboard
+			// Check if no view has focus:
+			View view = this.getCurrentFocus();
+			if (view != null) {
+				InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+			}
+
+
 			//byte[] message = "---Hello from BedderTestPlatform".getBytes();
 			byte[] messageBegin = "-".getBytes();
 			byte[] realMessage = inputText.getText().toString().getBytes();
@@ -491,6 +522,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			Log.e(TAG, "Remote exception from service, could not send message");
 			e.printStackTrace();
 		}
+		outputTextView.setMovementMethod(new ScrollingMovementMethod());
 	}
 
 	public void fileTransferComplete() {
@@ -499,7 +531,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		if (filesPending < 0)
 			filesPending = 0;
 		outputTextView.append("File transfer over, pending: " + filesPending+"\n");
-
+		outputTextView.setMovementMethod(new ScrollingMovementMethod());
 	}
 
 	private void sendFile(String address) {
@@ -567,6 +599,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		} catch (RemoteException e) {
 			Log.e(TAG, "Failed to send RTT message, remote exception");
 		}
+		outputTextView.setMovementMethod(new ScrollingMovementMethod());
 	}
 
 	@SuppressWarnings("unused")
@@ -615,7 +648,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				return true;
 			case CONTEXT_MENU_DISCONNECT:
 				try {
-					sendMessage(selectedAddress, "The connection was closed from the other side");
+					sendMessage(selectedAddress, "The connection to ");
 					mBeddernetService.manualDisconnect(selectedAddress);
 				} catch (RemoteException e) {
 					Log.e(TAG, "Could not manually disconnect", e);
@@ -759,8 +792,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				case TEXT_MESSAGE:
 					refreshDeviceList();
 					String msg = new String(message, 1, message.length - 1);
-					outputTextView.append("Message received from: " + senderAddress
-							+ "Message text: " + msg + "\n");
+					String toSend="<font color='#CFFAD2'>"+getNameFromMacadress(senderAddress)+": " +msg+"</font><br/>";
+					outputTextView.append(Html.fromHtml(toSend));
+					//outputTextView.append("Message received from: " + senderAddress
+					//		+ "Message text: " + msg + "\n");
 					Log.i(TAG, "Text message received: " + msg);
 					break;
 				case FILE_END:
@@ -789,6 +824,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 					//MediaPlayer mp = MediaPlayer.create(activity, R.raw.walterminion);
 					mp = new MediaPlayer();
 					try {
+
 						mp.setDataSource(mFileNameToPlay);
 						mp.prepare();
 					} catch (IOException e) {
@@ -812,6 +848,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				default:
 					break;
 			}
+			outputTextView.setMovementMethod(new ScrollingMovementMethod());
 		}
 
 		public void updateWithSendersApplicationIdentifierHash(
@@ -917,5 +954,15 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 	public TextView getOutputTextView() {
 		return outputTextView;
+	}
+	private String getNameFromMacadress(String address) {
+		String deviceName="Unknown";
+		try {
+			deviceName=mBeddernetService.getDeviceName(address);
+		} catch (RemoteException e) {
+			Log.i(TAG,"Konnte nicht den Namen der Mac-Adresse ausfindig machen");
+			e.printStackTrace();
+		}
+		return deviceName;
 	}
 }
