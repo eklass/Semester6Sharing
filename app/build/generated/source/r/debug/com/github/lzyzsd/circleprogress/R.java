@@ -51,7 +51,7 @@ public final class R {
 		public static final int ic_launcher = 0x7f020050;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f060032;
+		public static final int app_name = 0x7f050032;
 	}
 	public static final class styleable {
 		public static final int[] ArcProgress = { 0x7f010094, 0x7f010095, 0x7f010096, 0x7f010097, 0x7f010098, 0x7f010099, 0x7f01009a, 0x7f01009b, 0x7f01009c, 0x7f01009d, 0x7f01009e, 0x7f01009f, 0x7f0100a0 };
