@@ -48,7 +48,7 @@ public final class R {
 		public static final int donut_unfinished_stroke_width = 0x7f0100b1;
 	}
 	public static final class drawable {
-		public static final int ic_launcher = 0x7f020050;
+		public static final int ic_launcher = 0x7f020051;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f060032;

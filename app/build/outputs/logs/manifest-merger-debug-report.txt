@@ -53,7 +53,7 @@ MERGED from [com.android.support:support-v4:23.4.0] /Users/erichklassen/AndroidS
 	android:label
 		ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:15:9-41
 	android:icon
-		ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:14:9-38
+		ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:14:9-46
 activity#itu.beddernet.BeddernetConsole
 ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:17:9-25:20
 	android:label
