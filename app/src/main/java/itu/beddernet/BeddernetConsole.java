@@ -261,6 +261,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			}
 		};
 
+		inputText = (EditText) findViewById(R.id.txtInput);
 		deviceColorList = new ArrayList<String>();
 		// ATTENTION: This was auto-generated to implement the App Indexing API.
 		// See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -561,7 +562,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		String toSend="<font color='#CFE2FA'>Me to "+deviceName+": " +messageIsend+"</font><br/>";
 		outputTextView.append(Html.fromHtml(toSend));
 		try {
-			inputText = (EditText) findViewById(R.id.txtInput);
+
 
 			// Disable the Keyboard
 			// Check if no view has focus:
