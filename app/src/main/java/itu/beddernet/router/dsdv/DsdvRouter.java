@@ -238,4 +238,8 @@ public class DsdvRouter implements RouterInterface, AppRouterInterface {
 	public String getDeviceName(String address){
 		return rtMgr.getDeviceName(address);
 	}
+
+	public void refreshDevices(){
+		bednetService.refreshDevices();
+	}
 }

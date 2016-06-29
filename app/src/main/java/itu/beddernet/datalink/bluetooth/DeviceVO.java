@@ -120,6 +120,9 @@ public class DeviceVO implements Runnable {
 					+ NetworkAddress.castNetworkAddressToString(btAddress)
 					+ " - Message recieved in packetlistener");
 			// Here must be the refresh deviceListe
+			bluetoothDatalink.refreshDevices();
+
+
 			switch (type) {
 
 			//First byte is the control byte, datalink layer has A, B and C (65, 66, 67) 

@@ -624,6 +624,9 @@ _data.recycle();
 }
 return _result;
 }
+/**
+    *R eturn the Devicename from a given address
+    */
 @Override public java.lang.String getDeviceName(java.lang.String address) throws android.os.RemoteException
 {
 android.os.Parcel _data = android.os.Parcel.obtain();
@@ -753,5 +756,8 @@ public java.lang.String[] getDevicesWithStatus() throws android.os.RemoteExcepti
     *Returns all service hashes on a specific device. 
     */
 public long[] getAllUAIHOnDevice(java.lang.String UAIH) throws android.os.RemoteException;
+/**
+    *R eturn the Devicename from a given address
+    */
 public java.lang.String getDeviceName(java.lang.String address) throws android.os.RemoteException;
 }

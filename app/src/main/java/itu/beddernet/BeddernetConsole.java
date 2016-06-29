@@ -1,6 +1,8 @@
 //Sammlung an Links: 	http://stackoverflow.com/questions/23945171/android-app-bluetooth-connection-without-pairing
 //Handler:				http://stackoverflow.com/questions/13079645/android-how-to-wait-asynctask-to-finish-in-mainthread
 //Disabling Keyboard: 	http://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
+// Now working on: 		http://stackoverflow.com/questions/22573301/how-to-pass-a-handler-from-activity-to-service
+// 						http://stackoverflow.com/questions/6369287/accessing-ui-thread-handler-from-a-service
 package itu.beddernet;
 
 import itu.beddernet.approuter.IBeddernetService;
@@ -17,9 +19,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -32,6 +36,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -84,6 +89,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	};
 
 	private EditText inputText;
+
+	static final public String COPA_RESULT = "com.controlj.copame.backend.COPAService.REQUEST_PROCESSED";
+	static final public String COPA_MESSAGE = "com.controlj.copame.backend.COPAService.COPA_MSG";
 
 	private static final int CONTEXT_MENU_SEND_MESSAGE = 1;
 	private static final int CONTEXT_MENU_DISCONNECT = 2;
@@ -146,6 +154,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	 * See https://g.co/AppIndexing/AndroidStudio for more information.
 	 */
 	private GoogleApiClient client;
+	private BroadcastReceiver receiver;
 
 	protected void onDestroy() {
 		if (mBeddernetService != null) {
@@ -183,6 +192,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		//mFileNameToPlay += "/audiorecordtest.3gp";
 
 		super.onCreate(savedInstanceState);
+
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		Intent bindIntent = new Intent(
 				"itu.beddernet.approuter.BeddernetService");
@@ -231,6 +241,17 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		animation.setInterpolator (new DecelerateInterpolator());
 		animation.start ();
 		*/
+
+		//super.setContentView(R.layout.copa);
+		receiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				Log.e(TAG,"ICH WURDE GERUFEN!!! WAS GEHT AB!");
+				refreshDeviceList();
+				// do something here.
+			}
+		};
+
 
 		// ATTENTION: This was auto-generated to implement the App Indexing API.
 		// See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -367,6 +388,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		}
 	}
 
+
 	public void onServiceConnected(ComponentName className, IBinder service) {
 		try {
 			Log.d(TAG, "Service connected:" + service.getInterfaceDescriptor());
@@ -374,6 +396,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			e.printStackTrace();
 			Log.d(TAG, "Service connected but something fucked up");
 		}
+
 		mBeddernetService = IBeddernetService.Stub.asInterface(service);
 		if (mBeddernetService == null)
 			Log.e(TAG, "MyService is nul!!?!");
@@ -568,6 +591,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				try {
 					mBeddernetService.sendUnicast(address, null, buffer,
 							applicationIdentifier);
+
 				} catch (Exception e) {
 					Log.e(TAG, "Could open resource. The target device may have not opened Beddernet");
 				}
@@ -609,11 +633,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		}
 	}
 
-	/*public void onStart(){
-		// Pfad, wo die der Record gespeichert ist
-		Log.i(TAG,"OnStart wurde durchgeführt");
 
-	}*/
 	public void onCreateContextMenu(ContextMenu menu, View v,
 									ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -881,7 +901,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				Uri.parse("android-app://itu.beddernet/http/host/path")
 		);
 		AppIndex.AppIndexApi.start(client, viewAction);
-
+		LocalBroadcastManager.getInstance(this).registerReceiver((receiver),
+				new IntentFilter(COPA_RESULT)
+		);
 	}
 
 	@Override
@@ -902,6 +924,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		);
 		AppIndex.AppIndexApi.end(client, viewAction);
 		client.disconnect();
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+		super.onStop();
 	}
 
 	private class DuplexFileTest extends AsyncTask<String, Object, Object> {

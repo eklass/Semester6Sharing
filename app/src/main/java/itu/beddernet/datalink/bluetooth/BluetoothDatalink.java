@@ -378,4 +378,8 @@ public class BluetoothDatalink implements DatalinkInterface {
 		BluetoothDevice other = btAdapter.getRemoteDevice(address);
 		return other.getName();
 	}
+
+	public void refreshDevices(){
+		rm.refreshDevices();
+	}
 }

@@ -777,4 +777,8 @@ public class RouteManager {
 	public String getDeviceName(String address){
 		return datalink.getDeviceName(address);
 	}
+
+	public void refreshDevices(){
+		dsdvRouter.refreshDevices();
+	}
 }

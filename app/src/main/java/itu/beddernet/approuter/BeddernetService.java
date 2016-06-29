@@ -24,11 +24,14 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 import android.support.v4.app.NotificationCompat;
@@ -40,12 +43,27 @@ import android.support.v4.app.NotificationCompat;
  */
 public class BeddernetService extends Service {
 
+	/*---start- This code is for updating the deviceList from the DeviceVO*/
+	LocalBroadcastManager broadcaster;
+	static final public String COPA_RESULT = "com.controlj.copame.backend.COPAService.REQUEST_PROCESSED";
+
+	static final public String COPA_MESSAGE = "com.controlj.copame.backend.COPAService.COPA_MSG";
+
+	public void sendResult(String message) {
+		Intent intent = new Intent(COPA_RESULT);
+		if(message != null)
+			intent.putExtra(COPA_MESSAGE, message);
+		broadcaster.sendBroadcast(intent);
+	}
+	/*---end--------------------------------------------------------------*/
+
 	private static Context returnContext;
 	/**
 	 * List of callback items (Connected applications)
 	 */
 	final RemoteCallbackList<IBeddernetServiceCallback> mCallbacks = new RemoteCallbackList<IBeddernetServiceCallback>();
 	private AppRouterHandler handler;
+	Handler refreshDeviceHandler;
 	private RouterInterface router;
 	private static String TAG = itu.beddernet.common.BeddernetInfo.TAG;
 	private int connectedApplications = 0;
@@ -81,6 +99,9 @@ public class BeddernetService extends Service {
 		// startMaintainer();
 
 		sendNotification();
+
+		broadcaster = LocalBroadcastManager.getInstance(this);
+
 	}
 
 	/**
@@ -426,6 +447,14 @@ public class BeddernetService extends Service {
 
 	};
 
+	/*public void setRefreshDeviceHandler(Handler h){
+		refreshDeviceHandler=h;
+	}*/
+	public void refreshDevices(){
+		/*Handler handler = new Handler(Looper.getMainLooper());
+		handler.sendEmptyMessage(0);*/
+		sendResult("test");
+	}
 	public static Context getBeddernetInstance() {
 		if (returnContext == null) {
 			Log.e(TAG, "BeddernetService was null");

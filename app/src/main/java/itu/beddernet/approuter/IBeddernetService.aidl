@@ -134,6 +134,15 @@ interface IBeddernetService {
     *Returns all service hashes on a specific device. 
     */	
 	long[] getAllUAIHOnDevice(String UAIH);
-    
+
+    /**
+    *Return the Devicename from a given address
+    */
     String getDeviceName(String address);
+
+    /**
+    * Sets the RefreshHandler from Beddernetconsole
+    */
+    //void setRefreshHandler(Object h);
+    //void refreshDevices();
 }
