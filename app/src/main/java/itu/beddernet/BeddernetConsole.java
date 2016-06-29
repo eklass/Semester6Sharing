@@ -18,6 +18,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -91,7 +93,13 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private EditText inputText;
 
 	static final public String COPA_RESULT = "com.controlj.copame.backend.COPAService.REQUEST_PROCESSED";
-	static final public String COPA_MESSAGE = "com.controlj.copame.backend.COPAService.COPA_MSG";
+	static final public String FIRST_COLOR = "#F781BE";
+	static final public String SECOND_COLOR = "#BE81F7";
+	static final public String THIRD_COLOR = "#819FF7";
+	static final public String FOURTH_COLOR = "#81DAF5";
+	static final public String FIFTH_COLOR = "#81F7BE";
+	static final public String SIXTH_COLOR = "#9FF781";
+	static final public String SEVENTH_COLOR = "#F5DA81";
 
 	private static final int CONTEXT_MENU_SEND_MESSAGE = 1;
 	private static final int CONTEXT_MENU_DISCONNECT = 2;
@@ -133,6 +141,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private IBeddernetService mBeddernetService;
 	private Activity activity;
 	public ArrayAdapter<String> mDeviceArrayAdapter;
+	public ArrayList<String> deviceColorList;
 	private ListView mDeviceView;
 	public static String applicationIdentifier = "BeddernetConsole";
 	public static long applicationIdentifierHash = applicationIdentifier
@@ -252,7 +261,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			}
 		};
 
-
+		deviceColorList = new ArrayList<String>();
 		// ATTENTION: This was auto-generated to implement the App Indexing API.
 		// See https://g.co/AppIndexing/AndroidStudio for more information.
 		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -362,8 +371,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		serviceConnectionStatus = "Service disconnected";
 	}
 
+
 	private void refreshDeviceList() {
 		mDeviceArrayAdapter.clear();
+		//deviceColorList.clear();
 		String[] deviceList = null;
 		try {
 			deviceList = mBeddernetService.getDevicesWithStatus();
@@ -380,6 +391,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				//mDeviceArrayAdapter.add(deviceList[i] + ":" + deviceList[i + 1]);
 				try {
 					mDeviceArrayAdapter.add(deviceList[i]+":"+mBeddernetService.getDeviceName(deviceList[i])+":"+deviceList[i + 1]);
+					// If the Mac-Address is already in deviceColorList, than dont add it
+					if(!deviceColorList.contains(deviceList[i])) {
+						deviceColorList.add(deviceList[i]);
+					}
 				} catch (RemoteException e) {
 					Log.e(TAG,"Error to get DeviceName");
 					e.printStackTrace();
@@ -423,7 +438,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 					break;
 
 				case R.id.clrTxt:
-					outputTextView.setText("Ausgabe:\n");
+					outputTextView.setText("Ausgabe: der Textnachrichten\n");
 					break;
 
 				/*case R.id.refDevice:
@@ -465,13 +480,43 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		}
 	}
 
+	String getColorFromAddress(String address){
+		int counter=0;
+		for (String addr: deviceColorList) {
+			if (addr.equals(address)){
+				break;//If the address is found then everything is okay
+			}
+			else {
+				counter++;
+			}
+		}
+		switch (counter){
+			case 0:
+				return FIRST_COLOR;
+			case 1:
+				return SECOND_COLOR;
+			case 2:
+				return THIRD_COLOR;
+			case 3:
+				return FOURTH_COLOR;
+			case 4:
+				return FIFTH_COLOR;
+			case 5:
+				return SIXTH_COLOR;
+			case 6:
+				return SEVENTH_COLOR;
+		}
+		return "";
+	}
+
 	private void sendMessage(String address, String message) {
+		String hexColorForDeviceText=getColorFromAddress(address);
 		String deviceName;
 		deviceName=getNameFromMacadress(address);
 		Log.i(TAG,
 				"BedderTestPlatform: DeviceList clicked, sending message to: "
 						+ address);
-		String toSend="<font color='#FAA987'>"+message+deviceName+" is closed"+"</font><br/>";
+		String toSend="<font color='"+hexColorForDeviceText+"'>"+message+deviceName+" is closed"+"</font><br/>";
 		outputTextView.append(Html.fromHtml(toSend));
 		refreshDeviceList();
 		try {
@@ -500,6 +545,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 
 	private void sendMessage(String address) {
+
 		String deviceName="Unknown";
 		String messageIsend;
 		if (inputText==null){
@@ -812,7 +858,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				case TEXT_MESSAGE:
 					refreshDeviceList();
 					String msg = new String(message, 1, message.length - 1);
-					String toSend="<font color='#CFFAD2'>"+getNameFromMacadress(senderAddress)+": " +msg+"</font><br/>";
+					String hexColorForDeviceText=getColorFromAddress(senderAddress);
+					String toSend="<font color='"+hexColorForDeviceText+"'>"+getNameFromMacadress(senderAddress)+": " +msg+"</font><br/>";
 					outputTextView.append(Html.fromHtml(toSend));
 					//outputTextView.append("Message received from: " + senderAddress
 					//		+ "Message text: " + msg + "\n");

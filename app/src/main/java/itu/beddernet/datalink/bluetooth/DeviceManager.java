@@ -59,6 +59,9 @@ public class DeviceManager {
 		deviceStatus.put(bt, "Slave");
 		Log.i(TAG, "New slave added:" + bt);
 		neighbourTableChanged();
+
+		//Refresh devices instantly, when a Slave was added
+		bluetoothDatalink.refreshDevices();
 	}
 
 	/**
