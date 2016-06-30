@@ -208,8 +208,12 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 		setContentView(R.layout.main);
+		// Here comes the Voice Fix
 		Button recVoiceButton = (Button) findViewById(R.id.recVoice);
 		recVoiceButton.setOnClickListener(buttonListnener);
+
+
+
 		Button clrTxtButton = (Button) findViewById(R.id.clrTxt);
 		clrTxtButton.setOnClickListener(buttonListnener);
 		//Button refDeviceButton = (Button) findViewById(R.id.refDevice);
