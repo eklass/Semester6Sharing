@@ -61,7 +61,7 @@ public class DeviceManager {
 		neighbourTableChanged();
 
 		//Refresh devices instantly, when a Slave was added
-		bluetoothDatalink.refreshDevices();
+		bluetoothDatalink.sendToBeddernetConsole("refreshDevices");
 	}
 
 	/**

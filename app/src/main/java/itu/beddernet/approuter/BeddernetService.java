@@ -49,6 +49,7 @@ public class BeddernetService extends Service {
 
 	static final public String COPA_MESSAGE = "com.controlj.copame.backend.COPAService.COPA_MSG";
 
+	// Send the result to BeddernetConsole to refresh the deviceList
 	public void sendResult(String message) {
 		Intent intent = new Intent(COPA_RESULT);
 		if(message != null)
@@ -97,10 +98,10 @@ public class BeddernetService extends Service {
 
 		// Maintainer is currently optional and not started onCreate
 		// startMaintainer();
+		broadcaster = LocalBroadcastManager.getInstance(this);
+		//sendToBeddernetConsole("searchForDevices");
 
 		sendNotification();
-
-		broadcaster = LocalBroadcastManager.getInstance(this);
 
 	}
 
@@ -422,6 +423,11 @@ public class BeddernetService extends Service {
 			return router.getDeviceName(address);
 		}
 
+		/*@Override
+		public BluetoothAdapter getBtAdapter() {
+			return router.getBtAdapter();
+		}*/
+
 		public String[] getDevicesWithStatus() throws RemoteException {
 			Log.d(TAG, "Available devices with status requested");
 			long[] networkAddresses = router.getAvailableDevices();
@@ -447,13 +453,19 @@ public class BeddernetService extends Service {
 
 	};
 
-	/*public void setRefreshDeviceHandler(Handler h){
-		refreshDeviceHandler=h;
-	}*/
-	public void refreshDevices(){
+
+	/*
+	*
+	* This method sends via a LocalBroadcastManager a message to BeddernetConsole.
+	* This is like a bridge to communicate between BeddernetConsole and a Service
+	*
+	* written by Erich Klassen (02.07.15)
+	* */
+
+	public void sendToBeddernetConsole(String message){
 		/*Handler handler = new Handler(Looper.getMainLooper());
 		handler.sendEmptyMessage(0);*/
-		sendResult("test");
+		sendResult(message);
 	}
 	public static Context getBeddernetInstance() {
 		if (returnContext == null) {
@@ -505,6 +517,7 @@ public class BeddernetService extends Service {
 
 			Log.d(TAG, "BEDnet Service started");
 			random = new Random();
+
 		} else {
 			Toast.makeText(this, "The service could not be started",
 					Toast.LENGTH_LONG).show();
@@ -512,7 +525,5 @@ public class BeddernetService extends Service {
 			stopSelf();
 		}
 	}
-	//public String getDeviceName(String address){
-//		return router.getDeviceName(address);
-	//}
+
 }

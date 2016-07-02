@@ -1,5 +1,6 @@
 package itu.beddernet.recordSound;
 
+// http://stackoverflow.com/questions/11116051/how-can-i-record-voice-in-android-as-long-as-hold-a-button
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -8,6 +9,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +24,7 @@ public class recordActivity extends Activity {
     private static final String LOG_TAG = "AudioRecordTest";
     private static String mFileName = null;
 
+    private Button buttonToRecord = null;
     private RecordButton mRecordButton = null;
     private MediaRecorder mRecorder = null;
 
@@ -61,8 +64,11 @@ public class recordActivity extends Activity {
     }
 
     public void startRecording() {
+
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        // Maybe we can reduce the size of the voice through audio encoder
+        //mRecorder.setAudioEncoder(8000);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(mFileName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
@@ -104,8 +110,10 @@ public class recordActivity extends Activity {
         }
     }
 
+
     class PlayButton extends Button {
         boolean mStartPlaying = true;
+
 
         OnClickListener clicker = new OnClickListener() {
             public void onClick(View v) {
@@ -137,9 +145,28 @@ public class recordActivity extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        //setContentView(R.layout.main);
+        buttonToRecord=(Button)findViewById(R.id.recVoice);
+        buttonToRecord.setOnTouchListener(new View.OnTouchListener() {
 
-        LinearLayout ll = new LinearLayout(this);
-        mRecordButton = new RecordButton(this);
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                switch(event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        RecordLog.logString("Start Recording");
+                        startRecording();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        RecordLog.logString("stop Recording");
+                        stopRecording();
+                        break;
+                }
+                return false;
+            }
+        });
+        //LinearLayout ll = new LinearLayout(this);
+        /*mRecordButton = new RecordButton(this);
         ll.addView(mRecordButton,
                 new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -152,6 +179,7 @@ public class recordActivity extends Activity {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         0));
         setContentView(ll);
+*/
     }
 
     @Override

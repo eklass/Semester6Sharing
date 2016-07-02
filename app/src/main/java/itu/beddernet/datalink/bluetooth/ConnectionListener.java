@@ -87,6 +87,8 @@ public class ConnectionListener extends Thread {
 								+ " : Accepted incoming connection, handling");
 						dm.handleNewIncomingConnection(conn);
 					}
+					// Hier vielleicht search for devices?
+					//BluetoothDatalink.getBluetoothDatalinkInstance().sendToBeddernetConsole("searchForDevice");
 				}
 			} catch (Exception e) {
 				Log.d(TAG, TAG2 + " : Exception:" + e.getMessage(), e);
@@ -126,6 +128,7 @@ public class ConnectionListener extends Thread {
 					BeddernetInfo.SDP_RECORD_NAME, BeddernetInfo.BT_NETWORK_UUID);
 		} catch (IOException e) {
 			Log.e(TAG, "Could not open serverSocket: " + e.getMessage());
+
 			e.printStackTrace();
 		}
 	}
@@ -203,7 +206,7 @@ class SocketMaintainer implements Runnable {
 						BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
 				discoverableIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				discoverableIntent.putExtra(
-						BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+						BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
 				if (BeddernetService.getBeddernetInstance() != null) {
 					BeddernetService.getBeddernetInstance().startActivity(
 							discoverableIntent);

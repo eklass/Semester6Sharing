@@ -7,6 +7,7 @@ import itu.beddernet.router.RouterInterface;
 import itu.beddernet.router.dsdv.net.RouteManager;
 import itu.beddernet.router.message.multi.MultiMessage;
 import itu.beddernet.router.message.uni.UniMessage;
+
 import android.os.Handler;
 import android.util.Log;
 
@@ -239,7 +240,11 @@ public class DsdvRouter implements RouterInterface, AppRouterInterface {
 		return rtMgr.getDeviceName(address);
 	}
 
-	public void refreshDevices(){
-		bednetService.refreshDevices();
+	public void sendToBeddernetConsole(String message){
+		bednetService.sendToBeddernetConsole(message);
 	}
+
+	/*public BluetoothAdapter getBtAdapter() {
+		return rtMgr.getBtAdapter();
+	}*/
 }

@@ -120,8 +120,7 @@ public class DeviceVO implements Runnable {
 					+ NetworkAddress.castNetworkAddressToString(btAddress)
 					+ " - Message recieved in packetlistener");
 			// Here must be the refresh deviceListe
-			bluetoothDatalink.refreshDevices();
-
+			bluetoothDatalink.sendToBeddernetConsole("refreshDevices");
 
 			switch (type) {
 

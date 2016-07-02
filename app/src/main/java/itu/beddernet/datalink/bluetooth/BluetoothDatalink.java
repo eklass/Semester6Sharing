@@ -99,6 +99,9 @@ public class BluetoothDatalink implements DatalinkInterface {
 						BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
 				BeddernetService.getBeddernetInstance().startActivity(
 						discoverableIntent);
+				stillWaitingForBT=false;
+				// Here the Service is not created yet, so the broadcaster here will not work
+				//sendToBeddernetConsole("searchForDevices");
 			}
 		} catch (Exception e) {
 			Log.d(TAG, "Problem with starting bluetooth default adapter"
@@ -156,6 +159,9 @@ public class BluetoothDatalink implements DatalinkInterface {
 		myConnectionURL = cl.getConnectionURL();
 		clThread = new Thread(cl);
 		clThread.start();
+		/*Now make a Search for Devies*/
+		//sendToBeddernetConsole("searchForDevices");
+
 	}
 
 	public void stopListeningForConnection() {
@@ -379,7 +385,10 @@ public class BluetoothDatalink implements DatalinkInterface {
 		return other.getName();
 	}
 
-	public void refreshDevices(){
-		rm.refreshDevices();
+	public void sendToBeddernetConsole(String message){
+		rm.sendToBeddernetConsole(message);
+	}
+	public boolean isStillWaitingForBT(){
+		return stillWaitingForBT;
 	}
 }

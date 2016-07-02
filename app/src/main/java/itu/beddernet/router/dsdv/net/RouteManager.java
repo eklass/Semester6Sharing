@@ -24,6 +24,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.Map.Entry;
 
+import android.bluetooth.BluetoothAdapter;
 import android.os.Handler;
 import android.util.Log;
 
@@ -718,6 +719,7 @@ public class RouteManager {
 			rte.addService(UAIH);
 			Log.d(TAG, "new service added");
 			rte.setRouteChanged(true);
+			//sendToBeddernetConsole("searchForDevices");
 		}
 		else
 		{
@@ -778,7 +780,11 @@ public class RouteManager {
 		return datalink.getDeviceName(address);
 	}
 
-	public void refreshDevices(){
-		dsdvRouter.refreshDevices();
+	public void sendToBeddernetConsole(String message){
+		dsdvRouter.sendToBeddernetConsole(message);
 	}
+
+	/*public BluetoothAdapter getBtAdapter() {
+		return datalink.getBtAdapter();
+	}*/
 }

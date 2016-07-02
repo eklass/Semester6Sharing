@@ -1,5 +1,7 @@
 package itu.beddernet.router;
 
+import android.bluetooth.BluetoothAdapter;
+
 import itu.beddernet.router.message.multi.MultiMessage;
 import itu.beddernet.router.message.uni.UniMessage;
 

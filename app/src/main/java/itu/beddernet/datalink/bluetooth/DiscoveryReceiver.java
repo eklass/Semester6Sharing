@@ -63,10 +63,13 @@ public class DiscoveryReceiver extends BroadcastReceiver {
 
 				if (datalink != null) {
 					datalink.btStatus(true);
+					// Der Fall Wenn Bluetooth gerade erst angeschaltet wird -> Suche nach Geräte
+					datalink.sendToBeddernetConsole("searchForDevices");
 				} else {
 					Log.i(TAG, "Discovery receiver: " +
 							"Datalink not notified, was null (BEDnet off?)");
 				}
+
 				break;
 			case BluetoothAdapter.STATE_TURNING_OFF:
 				bluetoothStatus = BeddernetInfo.BLUETOOTH_STATE_TURNING_OFF;
@@ -90,6 +93,11 @@ public class DiscoveryReceiver extends BroadcastReceiver {
 			case BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE:
 				bluetoothScanStatus = BeddernetInfo.BLUETOOTH_SCAN_MODE_CONNECTABLE_DISCOVERABLE;
 				Log.i(TAG, "Discovery receiver: Bluetooth Connectable AND Discoverable");
+				// Der Fall wenn Bluetooth angeschaltet ist && DISCOVERBLE IST -> Suche nach Geräte
+
+				//	BluetoothDatalink.getBluetoothDatalinkInstance().sendToBeddernetConsole("searchForDevices");
+
+
 				break;
 			case BluetoothAdapter.SCAN_MODE_NONE:
 				bluetoothScanStatus = BeddernetInfo.BLUETOOTH_SCAN_MODE_NONE;

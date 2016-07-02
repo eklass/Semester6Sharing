@@ -145,4 +145,6 @@ interface IBeddernetService {
     */
     //void setRefreshHandler(Object h);
     //void refreshDevices();
+    //void sendToBeddernetConsole(String message);
+
 }
