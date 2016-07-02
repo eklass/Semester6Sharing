@@ -19,8 +19,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfc08e18-8e30-4f96-88ff-9cdfad0aa9da" name="Default" comment="Protokoll wurde korriegiert:&#10;Es werden mit Find Devices alle Geräte angezeigt die in der Umgebung sind (bzw. die App offen haben)&#10;Begrenzung von 2 Geräten aufgehoben!&#10;AD-Hoc wurde erfolgreich getestet!&#10;Ausgabetext bei Finddevices hinzugefügt (Debugzwecke)&#10;3 neue Button:&#10;refDevice: mach ein Refresh der Geräte (zugänglicher als über das Menü)&#10;CLRTXT-bereinigt die Ausgabe in der App&#10;Voice button Farbe verändert.&#10;&#10;Next Step: Verbesserung der Connection (Problem 1xanmelden, 1xabmelden, 1x anmelden -&gt; Erfolgreiches Pairing)&#10;Das gilt es in dem nächsten Commit zu verbessern&#10;(BeddernetService, BluetoothService haben noch komische Fehlermeldungen)">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$4.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/recordSound/RecordLog.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/recordSound/recordActivity$1.class" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/itu/beddernet/recordSound/RecordLog.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/itu/beddernet/recordSound/betterRecordActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$2.class" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
@@ -29,9 +34,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$6.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$DuplexFileTest.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$DuplexFileTest.class" />
@@ -182,8 +184,8 @@
       <file leaf-file-name="BeddernetConsole.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.4">
-              <caret line="1053" column="0" selection-start-line="1053" selection-start-column="0" selection-end-line="1053" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6533333">
+              <caret line="500" column="78" selection-start-line="500" selection-start-column="61" selection-end-line="500" selection-end-column="78" />
               <folding>
                 <element signature="e#0#44520#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -2963,7 +2965,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1439" height="837" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.49427754" order="6" side_tool="false" content_ui="tabs" />
@@ -2980,7 +2982,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3633842" sideWeight="0.43848354" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22834645" sideWeight="0.49173555" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22834645" sideWeight="0.49173555" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.47424892" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24910523" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3590,8 +3592,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4">
-          <caret line="1053" column="0" selection-start-line="1053" selection-start-column="0" selection-end-line="1053" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6533333">
+          <caret line="500" column="78" selection-start-line="500" selection-start-column="61" selection-end-line="500" selection-end-column="78" />
           <folding>
             <element signature="e#0#44520#0" expanded="true" />
             <element signature="imports" expanded="true" />
