@@ -246,7 +246,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
         public void update(String senderAddress, byte[] message)
                 throws RemoteException {
-            Log.e(TAG,"------------------------ update (Z.246) wurde aufgerufen!");
             // if some send someoneelse a message, that the device list will be updated (to see, who send a message)
             refreshDeviceList();
             byte type = message[0];
@@ -409,7 +408,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.e(TAG,"------------------------ onCreate wurde aufgerufen!");
         //mFileNameToPlay += "/audiorecordtest.3gp";
 
         super.onCreate(savedInstanceState);
@@ -429,6 +427,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                 // TODO Auto-generated method stub
                 switch(event.getAction()){
                     case MotionEvent.ACTION_DOWN:
+                        vibrate();
                         RecordLog.logString("Start Recording");
                         recordSound.startRecording();
                         break;
@@ -511,7 +510,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
     /* Creates the menu items */
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.e(TAG,"------------------------ onCreateOptionsMenu (Z.491) wurde aufgerufen!");
         menu.add(0, MENU_MANUAL_REFRESH, 0, "Refresh device list");
         menu.add(0, MENU_DISCOVERY, 0, "Find devices");
         menu.add(0, MENU_SERVICES, 0, "View local services");
