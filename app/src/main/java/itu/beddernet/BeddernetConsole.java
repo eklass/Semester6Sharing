@@ -11,6 +11,7 @@ import itu.beddernet.approuter.IBeddernetServiceCallback;
 import itu.beddernet.common.BeddernetInfo;
 import itu.beddernet.common.NetworkAddress;
 import itu.beddernet.datalink.bluetooth.BluetoothDatalink;
+import itu.beddernet.recordSound.RecordLog;
 import itu.beddernet.recordSound.recordActivity;
 import itu.beddernet.router.dsdv.info.ConfigInfo;
 
@@ -49,6 +50,7 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
@@ -418,7 +420,26 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
         setContentView(R.layout.main);
         Button recVoiceButton = (Button) findViewById(R.id.recVoice);
-        recVoiceButton.setOnClickListener(buttonListnener);
+        //recVoiceButton.setOnClickListener(buttonListnener);
+        final recordActivity recordSound=new recordActivity();
+        recVoiceButton.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                switch(event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        RecordLog.logString("Start Recording");
+                        recordSound.startRecording();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        RecordLog.logString("stop Recording");
+                        recordSound.stopRecording();
+                        break;
+                }
+                return false;
+            }
+        });
 
         Button clrTxtButton = (Button) findViewById(R.id.clrTxt);
         clrTxtButton.setOnClickListener(buttonListnener);

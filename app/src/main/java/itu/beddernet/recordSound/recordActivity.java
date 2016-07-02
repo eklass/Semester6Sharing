@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import itu.beddernet.R;
 
-public class recordActivity extends Activity {
+public class recordActivity  {
 
     private static final String LOG_TAG = "AudioRecordTest";
     private static String mFileName = null;
@@ -142,7 +142,7 @@ public class recordActivity extends Activity {
     public String getPathToAudio() {
         return mFileName;
     }
-    @Override
+    /*@Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         //setContentView(R.layout.main);
@@ -180,7 +180,7 @@ public class recordActivity extends Activity {
                         0));
         setContentView(ll);
 */
-    }
+    /*}
 
     @Override
     public void onPause() {
@@ -194,5 +194,5 @@ public class recordActivity extends Activity {
             mPlayer.release();
             mPlayer = null;
         }
-    }
+    }*/
 }
