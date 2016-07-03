@@ -37,7 +37,7 @@
     },
     {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_launcher.png",
-        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.github.lzyzsd/circleprogress/1.1.0/res/drawable-xhdpi-v4/ic_launcher.png"
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/drawable-xhdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png",
@@ -76,12 +76,12 @@
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable-xhdpi-v4/abc_btn_rating_star_off_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png",
-        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_list_longpressed_holo.9.png",
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable-xhdpi-v4/abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_list_focused_holo.9.png",

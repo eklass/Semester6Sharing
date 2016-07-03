@@ -118,10 +118,6 @@ action#itu.beddernet.approuter.BeddernetService
 ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:159:17-83
 	android:name
 		ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:159:25-80
-activity#itu.beddernet.recordSound.recordActivity
-ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:163:9-63
-	android:name
-		ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:163:19-61
 meta-data#com.google.android.gms.version
 ADDED from /Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/AndroidManifest.xml:165:9-167:69
 MERGED from [com.google.android.gms:play-services-basement:8.1.0] /Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/AndroidManifest.xml:21:9-23:69

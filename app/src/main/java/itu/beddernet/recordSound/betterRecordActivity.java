@@ -8,7 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-//import ui.ViewProxy;
+//import audio.ui.ViewProxy;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;

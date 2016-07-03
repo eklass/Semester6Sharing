@@ -4,8 +4,10 @@
 // Now working on: 		http://stackoverflow.com/questions/22573301/how-to-pass-a-handler-from-activity-to-service
 // 						http://stackoverflow.com/questions/6369287/accessing-ui-thread-handler-from-a-service
 //                      http://stackoverflow.com/questions/14695537/android-update-activity-ui-from-service
+
 package itu.beddernet;
 
+import audio.MainActivity;
 import itu.beddernet.approuter.IBeddernetService;
 import itu.beddernet.approuter.IBeddernetServiceCallback;
 import itu.beddernet.common.BeddernetInfo;
@@ -14,6 +16,7 @@ import itu.beddernet.datalink.bluetooth.BluetoothDatalink;
 import itu.beddernet.recordSound.RecordLog;
 import itu.beddernet.recordSound.recordActivity;
 import itu.beddernet.router.dsdv.info.ConfigInfo;
+import audio.ui.*;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -23,6 +26,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -42,6 +48,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
@@ -63,6 +70,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,8 +86,80 @@ import com.google.android.gms.common.api.GoogleApiClient;
 // TODO:2. Automatisches installieren muss noch implementiert werden
 // TODO:3. GUI anpassen, dass man beliebigen Text verschicken kann
 
+
+
 public class BeddernetConsole extends Activity implements ServiceConnection {
 
+    public void startrecord() {
+        // TODO Auto-generated method stub
+        startTime = SystemClock.uptimeMillis();
+        timer = new Timer();
+        MyTimerTask myTimer = new MyTimerTask();
+        timer.schedule(myTimer, 1000, 1000);
+        //vibrate();
+    }
+
+    public void stoprecord() {
+        // TODO Auto-generated method stub
+        if (timer != null) {
+            timer.cancel();
+        }
+        if (recordTimeText.getText().toString().equals("00:00")) {
+            return;
+        }
+        recordTimeText.setText("00:00");
+        //vibrate();
+    }
+    class MyTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+            updatedTime = timeSwapBuff + timeInMilliseconds;
+            final String hms = String.format(
+                    "%02d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(updatedTime)
+                            - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS
+                            .toHours(updatedTime)),
+                    TimeUnit.MILLISECONDS.toSeconds(updatedTime)
+                            - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
+                            .toMinutes(updatedTime)));
+            long lastsec = TimeUnit.MILLISECONDS.toSeconds(updatedTime)
+                    - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
+                    .toMinutes(updatedTime));
+            System.out.println(lastsec + " hms " + hms);
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        if (recordTimeText != null)
+                            recordTimeText.setText(hms);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+
+                }
+            });
+        }
+    }
+
+    public static int dp(float value) {
+        return (int) Math.ceil(1 * value);
+    }
+
+    /*VOICE-BUTTON VARIABLE*/
+    private TextView recordTimeText;
+    private ImageButton audioSendButton;
+    private View recordPanel;
+    private View slideText;
+    private float startedDraggingX = -1;
+    private float distCanMove = dp(80);
+    private long startTime = 0L;
+    long timeInMilliseconds = 0L;
+    long timeSwapBuff = 0L;
+    long updatedTime = 0L;
+    private Timer timer;
 
     static final public String BEDDERNETCONSOLE_DO_REFRESHING = "refreshDevices";
     static final public String BEDDERNETCONSOLE_DO_SEARCHING = "searchForDevices";
@@ -166,7 +246,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         public void onClick(View src) {
             switch (src.getId()) {
                 case R.id.recVoice:
-                    startActivity(new Intent(getApplicationContext(), recordActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     break;
 
                 case R.id.clrTxt:
@@ -418,8 +498,98 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
         setContentView(R.layout.main);
         Button recVoiceButton = (Button) findViewById(R.id.recVoice);
+
+        /*------ HERE COMES THE VOICEBUTTONFIX -----------*/
+        final MainActivity voiceClass = new MainActivity();
+
+        recordPanel = findViewById(R.id.record_panel);
+        recordTimeText = (TextView) findViewById(R.id.recording_time_text);
+        slideText = findViewById(R.id.slideText);
+        audioSendButton = (ImageButton) findViewById(R.id.chat_audio_send_button);
+        TextView textView = (TextView) findViewById(R.id.slideToCancelTextView);
+        textView.setText("SlideToCancel");
+        audioSendButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) slideText
+                            .getLayoutParams();
+                    params.leftMargin = dp(30);
+                    slideText.setLayoutParams(params);
+                    ViewProxy.setAlpha(slideText, 1);
+                    startedDraggingX = -1;
+                    // startRecording();
+                    voiceClass.startrecord();
+                    vibrate();
+                    audioSendButton.getParent()
+                            .requestDisallowInterceptTouchEvent(true);
+                    recordPanel.setVisibility(View.VISIBLE);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP
+                        || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                    startedDraggingX = -1;
+                    voiceClass.stoprecord();
+                    // stopRecording(true);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                    float x = motionEvent.getX();
+                    if (x < -distCanMove) {
+                        voiceClass.stoprecord();
+                        vibrate();
+                        // stopRecording(false);
+                    }
+                    x = x + ViewProxy.getX(audioSendButton);
+                    FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) slideText
+                            .getLayoutParams();
+                    if (startedDraggingX != -1) {
+                        float dist = (x - startedDraggingX);
+                        params.leftMargin = dp(30) + (int) dist;
+                        slideText.setLayoutParams(params);
+                        float alpha = 1.0f + dist / distCanMove;
+                        if (alpha > 1) {
+                            alpha = 1;
+                        } else if (alpha < 0) {
+                            alpha = 0;
+                        }
+                        ViewProxy.setAlpha(slideText, alpha);
+                    }
+                    if (x <= ViewProxy.getX(slideText) + slideText.getWidth()
+                            + dp(30)) {
+                        if (startedDraggingX == -1) {
+                            startedDraggingX = x;
+                            distCanMove = (recordPanel.getMeasuredWidth()
+                                    - slideText.getMeasuredWidth() - dp(48)) / 2.0f;
+                            if (distCanMove <= 0) {
+                                distCanMove = dp(80);
+                            } else if (distCanMove > dp(80)) {
+                                distCanMove = dp(80);
+                            }
+                        }
+                    }
+                    if (params.leftMargin > dp(30)) {
+                        params.leftMargin = dp(30);
+                        slideText.setLayoutParams(params);
+                        ViewProxy.setAlpha(slideText, 1);
+                        startedDraggingX = -1;
+                    }
+                }
+                view.onTouchEvent(motionEvent);
+                return true;
+            }
+        });
+
+        /*----------------------HERE IS THE END OF VOICEBUTTONFIX--------------------*/
+
+
+
+
+
+
+
+
+
+
+
         //recVoiceButton.setOnClickListener(buttonListnener);
-        final recordActivity recordSound=new recordActivity();
+        /*final recordActivity recordSound=new recordActivity();
         recVoiceButton.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -438,7 +608,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                 }
                 return false;
             }
-        });
+        });*/
 
         Button clrTxtButton = (Button) findViewById(R.id.clrTxt);
         clrTxtButton.setOnClickListener(buttonListnener);
@@ -520,6 +690,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         if(!BluetoothDatalink.getBluetoothDatalinkInstance().stillWaitingForBT){
             searchForDevices();
         }
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -578,6 +750,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                     Log.e(TAG, "Failed to get services", e);
                 }
 
+
                 return true;
 
             case MENU_SHAREAPP:
@@ -599,7 +772,12 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                 startActivity(Intent.createChooser(intent, "Share app"));
 
         }
-        return false;
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+        //return false;
     }
 
     public void searchForDevices() {
