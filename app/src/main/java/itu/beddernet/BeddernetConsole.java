@@ -82,9 +82,8 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 // TODO: Es bleiben jedoch insgemein noch Probleme/Dinge die erledigt werden müssen:
-// TODO:1. Beim Versenden der Files Exception(Nicht immer
-// TODO:2. Automatisches installieren muss noch implementiert werden
-// TODO:3. GUI anpassen, dass man beliebigen Text verschicken kann
+// TODO:1. Automatisches installieren muss/kann noch implementiert werden
+
 
 
 
@@ -96,7 +95,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         timer = new Timer();
         MyTimerTask myTimer = new MyTimerTask();
         timer.schedule(myTimer, 1000, 1000);
-        //vibrate();
+        vibrate();
     }
 
     public void stoprecord() {
@@ -108,7 +107,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
             return;
         }
         recordTimeText.setText("00:00");
-        //vibrate();
+        vibrate();
     }
     class MyTimerTask extends TimerTask {
 
@@ -500,8 +499,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         Button recVoiceButton = (Button) findViewById(R.id.recVoice);
 
         /*------ HERE COMES THE VOICEBUTTONFIX -----------*/
-        final MainActivity voiceClass = new MainActivity();
-
+        final recordActivity recordSound = new recordActivity();
         recordPanel = findViewById(R.id.record_panel);
         recordTimeText = (TextView) findViewById(R.id.recording_time_text);
         slideText = findViewById(R.id.slideText);
@@ -518,23 +516,32 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                     slideText.setLayoutParams(params);
                     ViewProxy.setAlpha(slideText, 1);
                     startedDraggingX = -1;
-                    // startRecording();
-                    voiceClass.startrecord();
-                    vibrate();
+
+                    RecordLog.logString("Start Recording");
+                    recordSound.startRecording();
+
+                    startrecord();
                     audioSendButton.getParent()
                             .requestDisallowInterceptTouchEvent(true);
                     recordPanel.setVisibility(View.VISIBLE);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP
                         || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
                     startedDraggingX = -1;
-                    voiceClass.stoprecord();
+                    RecordLog.logString("Stop Recording");
+                    recordSound.stopRecording(true);
+                    stoprecord();
                     // stopRecording(true);
+
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
                     float x = motionEvent.getX();
                     if (x < -distCanMove) {
-                        voiceClass.stoprecord();
-                        vibrate();
                         // stopRecording(false);
+                        //RecordLog.logString("Stop Recording");
+                        recordSound.stopRecording(false);
+                        stoprecord();
+                        vibrate();
+
+
                     }
                     x = x + ViewProxy.getX(audioSendButton);
                     FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) slideText
@@ -1015,6 +1022,11 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         buffer[0] = FILE_MESSAGE;
         try {
             long startTime = System.currentTimeMillis();
+            if (input==null){
+                outputTextView.append("Um eine Sprachnachricht zu verschicken, zeichnen Sie die vorher auf.\n");
+                Log.e(TAG,"Es muss erst eine Nachricht aufgezeichnet werden");
+                return;
+            }
             while (input.read(buffer, 1, buffer.length - 1) != -1) {
                 try {
                     mBeddernetService.sendUnicast(address, null, buffer,

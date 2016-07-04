@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.io.File;
 import java.io.IOException;
 
 import itu.beddernet.R;
@@ -35,7 +36,7 @@ public class recordActivity  {
         if (start) {
             startRecording();
         } else {
-            stopRecording();
+            stopRecording(true);
         }
     }
 
@@ -82,10 +83,16 @@ public class recordActivity  {
         mRecorder.start();
     }
 
-    public void stopRecording() {
-        mRecorder.stop();
-        mRecorder.release();
-        mRecorder = null;
+    public void stopRecording(boolean saveRecord) {
+        if(mRecorder!=null){
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+            if (!saveRecord) {
+                File file = new File(mFileName);
+                file.delete();
+            }
+        }
     }
 
     class RecordButton extends Button {
