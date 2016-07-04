@@ -4,6 +4,8 @@
 // Now working on: 		http://stackoverflow.com/questions/22573301/how-to-pass-a-handler-from-activity-to-service
 // 						http://stackoverflow.com/questions/6369287/accessing-ui-thread-handler-from-a-service
 //                      http://stackoverflow.com/questions/14695537/android-update-activity-ui-from-service
+//VoiceButton           http://stackoverflow.com/questions/28711549/how-to-create-a-whatsapp-like-recording-button-with-slide-to-cancel
+//(interessant Voice)   http://stackoverflow.com/questions/11116051/how-can-i-record-voice-in-android-as-long-as-hold-a-button
 
 package itu.beddernet;
 
@@ -85,67 +87,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 // TODO:1. Automatisches installieren muss/kann noch implementiert werden
 
 
-
-
 public class BeddernetConsole extends Activity implements ServiceConnection {
 
-    public void startrecord() {
-        // TODO Auto-generated method stub
-        startTime = SystemClock.uptimeMillis();
-        timer = new Timer();
-        MyTimerTask myTimer = new MyTimerTask();
-        timer.schedule(myTimer, 1000, 1000);
-        vibrate();
-    }
 
-    public void stoprecord() {
-        // TODO Auto-generated method stub
-        if (timer != null) {
-            timer.cancel();
-        }
-        if (recordTimeText.getText().toString().equals("00:00")) {
-            return;
-        }
-        recordTimeText.setText("00:00");
-        vibrate();
-    }
-    class MyTimerTask extends TimerTask {
-
-        @Override
-        public void run() {
-            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-            updatedTime = timeSwapBuff + timeInMilliseconds;
-            final String hms = String.format(
-                    "%02d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(updatedTime)
-                            - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS
-                            .toHours(updatedTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(updatedTime)
-                            - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
-                            .toMinutes(updatedTime)));
-            long lastsec = TimeUnit.MILLISECONDS.toSeconds(updatedTime)
-                    - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
-                    .toMinutes(updatedTime));
-            System.out.println(lastsec + " hms " + hms);
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    try {
-                        if (recordTimeText != null)
-                            recordTimeText.setText(hms);
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }
-
-                }
-            });
-        }
-    }
-
-    public static int dp(float value) {
-        return (int) Math.ceil(1 * value);
-    }
 
     /*VOICE-BUTTON VARIABLE*/
     private TextView recordTimeText;
@@ -215,6 +159,77 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
     private long RTTEndTime = 0;
     private String TAG = BeddernetInfo.TAG;
     private IBeddernetService mBeddernetService;
+
+    /*
+    * Method to display the starttime for VoiceSlide
+    */
+    public void startrecord() {
+        // TODO Auto-generated method stub
+        startTime = SystemClock.uptimeMillis();
+        timer = new Timer();
+        MyTimerTask myTimer = new MyTimerTask();
+        timer.schedule(myTimer, 1000, 1000);
+        vibrate();
+    }
+
+    /*
+    * Method to stop the time for VoiceSlide
+    */
+    public void stoprecord() {
+        // TODO Auto-generated method stub
+        if (timer != null) {
+            timer.cancel();
+        }
+        if (recordTimeText.getText().toString().equals("00:00")) {
+            return;
+        }
+        recordTimeText.setText("00:00");
+        vibrate();
+    }
+
+    /*
+    * A class which does the time work for voiceslide
+    * */
+    class MyTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+            updatedTime = timeSwapBuff + timeInMilliseconds;
+            final String hms = String.format(
+                    "%02d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(updatedTime)
+                            - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS
+                            .toHours(updatedTime)),
+                    TimeUnit.MILLISECONDS.toSeconds(updatedTime)
+                            - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
+                            .toMinutes(updatedTime)));
+            long lastsec = TimeUnit.MILLISECONDS.toSeconds(updatedTime)
+                    - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
+                    .toMinutes(updatedTime));
+            System.out.println(lastsec + " hms " + hms);
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        if (recordTimeText != null)
+                            recordTimeText.setText(hms);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+
+                }
+            });
+        }
+    }
+
+    public static int dp(float value) {
+        return (int) Math.ceil(1 * value);
+    }
+
+    /*
+    * A handler to call refreshDeviceList inside the hirarchie (f.e. call from DeviceVO)
+    * */
     Handler myHandler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {
@@ -241,6 +256,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
      */
     private GoogleApiClient client;
     private BroadcastReceiver receiver;
+
     private OnClickListener buttonListnener = new OnClickListener() {
         public void onClick(View src) {
             switch (src.getId()) {
@@ -678,7 +694,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
             }
         };
 
-        inputText = (EditText) findViewById(R.id.txtInput);
+        inputText = (EditText) findViewById(R.id.writeSomeText);
         deviceColorList = new ArrayList<String>();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.

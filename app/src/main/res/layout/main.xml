@@ -66,6 +66,28 @@
 		style="?android:attr/progressBarStyleHorizontal"
 		android:max="100"
 		android:progress="65" />-->
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@+id/in"
+		android:layout_above="@+id/chat_send_button"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentEnd="true">
+
+		<TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/outputTextView"
+            android:scrollbars = "vertical"
+            android:text="Ausgabe der Textnachrichten\n"
+            android:scrollIndicators="right"
+            android:textColor="#000000"
+            android:gravity="bottom"
+            />
+	</RelativeLayout>
+
+	<!--android:layout_above="@+id/chat_send_button"
+	-->
 	<FrameLayout
 		android:id="@+id/progressBarHolder"
 		android:animateLayoutChanges="true"
@@ -82,17 +104,6 @@
 			android:indeterminate="true"
 			android:layout_gravity="center" />
 	</FrameLayout>
-
-	<TextView android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/outputTextView"
-		android:scrollbarStyle="insideInset"
-		android:text="Ausgabe der Textnachrichten\n"
-		android:layout_below="@+id/in"
-		android:scrollIndicators="right"
-		android:textColor="#ffffff"
-
-		android:gravity="bottom"/>
 
 	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/recVoice" android:text="Voice"
 		android:layout_column="7"
@@ -151,6 +162,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:layout_marginTop="1dp"
+				android:layout_marginLeft="85dp"
 				android:src="@drawable/slidearrow" />
 
 			<TextView
@@ -158,9 +170,10 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:layout_marginLeft="6dp"
+				android:layout_marginLeft="4dp"
 				android:textColor="#999999"
-				android:textSize="12dp" />
+				android:textSize="10dp" />
+
 		</LinearLayout>
 
 		<LinearLayout
@@ -175,8 +188,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:layout_marginTop="1dp"
-				android:src="@drawable/rec" />
+				android:src="@drawable/rec"/>
 
 			<TextView
 				android:id="@+id/recording_time_text"
@@ -186,7 +198,19 @@
 				android:layout_marginLeft="6dp"
 				android:text="00:00"
 				android:textColor="#4d4c4b"
-				android:textSize="16dp" />
+				android:textSize="13dp" />
+			<EditText
+				android:id="@+id/writeSomeText"
+				android:layout_width="match_parent"
+				android:layout_height="fill_parent"
+				android:layout_marginLeft="6dp"
+				android:textSize="12dp"
+				android:hint="Click To Write"
+				android:textColorHint="#7e7e7e"
+				android:layout_gravity="center_vertical"
+				android:layout_marginTop="0dp"
+				android:background="#e7e7e7"
+				android:textColor="#000000"/>
 		</LinearLayout>
 	</audio.FrameLayoutFixed>
 
