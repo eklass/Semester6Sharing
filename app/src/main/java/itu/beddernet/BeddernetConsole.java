@@ -260,10 +260,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
     private OnClickListener buttonListnener = new OnClickListener() {
         public void onClick(View src) {
             switch (src.getId()) {
-                case R.id.recVoice:
+                /*case R.id.recVoice:
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     break;
-
+*/
                 case R.id.clrTxt:
                     outputTextView.setText("Ausgabe: der Textnachrichten\n");
                     break;
@@ -512,8 +512,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
         this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
         setContentView(R.layout.main);
-        Button recVoiceButton = (Button) findViewById(R.id.recVoice);
-
         /*------ HERE COMES THE VOICEBUTTONFIX -----------*/
         final recordActivity recordSound = new recordActivity();
         recordPanel = findViewById(R.id.record_panel);
@@ -600,15 +598,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         });
 
         /*----------------------HERE IS THE END OF VOICEBUTTONFIX--------------------*/
-
-
-
-
-
-
-
-
-
 
 
         //recVoiceButton.setOnClickListener(buttonListnener);

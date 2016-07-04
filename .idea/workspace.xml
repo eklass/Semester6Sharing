@@ -34,19 +34,14 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$6.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$7.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$DuplexFileTest.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$DuplexFileTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$MyTimerTask$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$MyTimerTask$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$MyTimerTask.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole$MyTimerTask.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/BeddernetConsole.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$id.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/itu/beddernet/R$integer.class" />
@@ -63,6 +58,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/itu/beddernet/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/itu/beddernet/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/main.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/main.xml" />
@@ -178,12 +174,10 @@
       <file leaf-file-name="recordActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/recordSound/recordActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.185185">
+            <state vertical-scroll-proportion="0.0">
               <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2736#3097#0" expanded="true" />
-                <element signature="e#3096#3097#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -194,7 +188,114 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="3248" column="0" selection-start-line="3248" selection-start-column="0" selection-end-line="3248" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="e#0#297468#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#15471#15472#0" expanded="false" />
+                <element signature="e#15502#15503#0" expanded="false" />
+                <element signature="e#27340#27341#0" expanded="false" />
+                <element signature="e#27386#27387#0" expanded="false" />
+                <element signature="e#27419#27420#0" expanded="false" />
+                <element signature="e#27465#27466#0" expanded="false" />
+                <element signature="e#27503#27504#0" expanded="false" />
+                <element signature="e#27554#27555#0" expanded="false" />
+                <element signature="e#32240#32241#0" expanded="false" />
+                <element signature="e#32268#32269#0" expanded="false" />
+                <element signature="e#32308#32309#0" expanded="false" />
+                <element signature="e#32340#32341#0" expanded="false" />
+                <element signature="e#38060#38061#0" expanded="false" />
+                <element signature="e#38099#38100#0" expanded="false" />
+                <element signature="e#38624#38625#0" expanded="false" />
+                <element signature="e#38676#38677#0" expanded="false" />
+                <element signature="e#40970#40971#0" expanded="false" />
+                <element signature="e#41015#41016#0" expanded="false" />
+                <element signature="e#41066#41067#0" expanded="false" />
+                <element signature="e#41093#41094#0" expanded="false" />
+                <element signature="e#41618#41619#0" expanded="false" />
+                <element signature="e#41688#41689#0" expanded="false" />
+                <element signature="e#92862#92863#0" expanded="false" />
+                <element signature="e#92894#92895#0" expanded="false" />
+                <element signature="e#104386#104387#0" expanded="false" />
+                <element signature="e#104427#104428#0" expanded="false" />
+                <element signature="e#128647#128648#0" expanded="false" />
+                <element signature="e#128695#128696#0" expanded="false" />
+                <element signature="e#131561#131562#0" expanded="false" />
+                <element signature="e#131588#131589#0" expanded="false" />
+                <element signature="e#157379#157380#0" expanded="false" />
+                <element signature="e#157415#157416#0" expanded="false" />
+                <element signature="e#158312#158313#0" expanded="false" />
+                <element signature="e#158354#158355#0" expanded="false" />
+                <element signature="e#159095#159096#0" expanded="false" />
+                <element signature="e#159133#159134#0" expanded="false" />
+                <element signature="e#167463#167464#0" expanded="false" />
+                <element signature="e#167498#167499#0" expanded="false" />
+                <element signature="e#168272#168273#0" expanded="false" />
+                <element signature="e#168321#168322#0" expanded="false" />
+                <element signature="e#169803#169804#0" expanded="false" />
+                <element signature="e#169838#169839#0" expanded="false" />
+                <element signature="e#172918#172919#0" expanded="false" />
+                <element signature="e#172953#172954#0" expanded="false" />
+                <element signature="e#180822#180823#0" expanded="false" />
+                <element signature="e#180857#180858#0" expanded="false" />
+                <element signature="e#196591#196592#0" expanded="false" />
+                <element signature="e#196626#196627#0" expanded="false" />
+                <element signature="e#205309#205310#0" expanded="false" />
+                <element signature="e#205344#205345#0" expanded="false" />
+                <element signature="e#220627#220628#0" expanded="false" />
+                <element signature="e#220679#220680#0" expanded="false" />
+                <element signature="e#222419#222420#0" expanded="false" />
+                <element signature="e#222456#222457#0" expanded="false" />
+                <element signature="e#227526#227527#0" expanded="false" />
+                <element signature="e#227591#227592#0" expanded="false" />
+                <element signature="e#233130#233131#0" expanded="false" />
+                <element signature="e#233159#233160#0" expanded="false" />
+                <element signature="e#246271#246272#0" expanded="false" />
+                <element signature="e#246327#246328#0" expanded="false" />
+                <element signature="e#253430#253431#0" expanded="false" />
+                <element signature="e#253467#253468#0" expanded="false" />
+                <element signature="e#253825#253826#0" expanded="false" />
+                <element signature="e#253888#253889#0" expanded="false" />
+                <element signature="e#254450#254451#0" expanded="false" />
+                <element signature="e#254531#254532#0" expanded="false" />
+                <element signature="e#254821#254822#0" expanded="false" />
+                <element signature="e#254870#254871#0" expanded="false" />
+                <element signature="e#259233#259234#0" expanded="false" />
+                <element signature="e#259280#259281#0" expanded="false" />
+                <element signature="e#261183#261184#0" expanded="false" />
+                <element signature="e#261251#261252#0" expanded="false" />
+                <element signature="e#263964#263965#0" expanded="false" />
+                <element signature="e#263992#263993#0" expanded="false" />
+                <element signature="e#271099#271100#0" expanded="false" />
+                <element signature="e#271126#271127#0" expanded="false" />
+                <element signature="e#271190#271191#0" expanded="false" />
+                <element signature="e#271217#271218#0" expanded="false" />
+                <element signature="e#271270#271271#0" expanded="false" />
+                <element signature="e#271331#271332#0" expanded="false" />
+                <element signature="e#271393#271394#0" expanded="false" />
+                <element signature="e#271420#271421#0" expanded="false" />
+                <element signature="e#271482#271483#0" expanded="false" />
+                <element signature="e#271509#271510#0" expanded="false" />
+                <element signature="e#271560#271561#0" expanded="false" />
+                <element signature="e#271619#271620#0" expanded="false" />
+                <element signature="e#271681#271682#0" expanded="false" />
+                <element signature="e#271708#271709#0" expanded="false" />
+                <element signature="e#271770#271771#0" expanded="false" />
+                <element signature="e#271797#271798#0" expanded="false" />
+                <element signature="e#271848#271849#0" expanded="false" />
+                <element signature="e#271907#271908#0" expanded="false" />
+                <element signature="e#274993#274994#0" expanded="false" />
+                <element signature="e#275021#275022#0" expanded="false" />
+                <element signature="e#275521#275522#0" expanded="false" />
+                <element signature="e#275567#275568#0" expanded="false" />
+                <element signature="e#275929#275930#0" expanded="false" />
+                <element signature="e#276003#276004#0" expanded="false" />
+                <element signature="e#276262#276263#0" expanded="false" />
+                <element signature="e#276304#276305#0" expanded="false" />
+                <element signature="e#283134#283135#0" expanded="false" />
+                <element signature="e#283168#283169#0" expanded="false" />
+                <element signature="e#283770#283771#0" expanded="false" />
+                <element signature="e#283816#283817#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -202,7 +303,7 @@
       <file leaf-file-name="FrameLayoutFixed.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/audio/FrameLayoutFixed.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.5555553">
+            <state vertical-scroll-proportion="0.0">
               <caret line="129" column="44" selection-start-line="129" selection-start-column="42" selection-end-line="129" selection-end-column="44" />
               <folding />
             </state>
@@ -211,14 +312,14 @@
       </file>
       <file leaf-file-name="main.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4814815">
-              <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.8194444">
+              <caret line="70" column="38" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="38" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -227,7 +328,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="34" column="81" selection-start-line="34" selection-start-column="81" selection-end-line="34" selection-end-column="81" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#3174#3175#0" expanded="false" />
+                <element signature="e#3205#3206#0" expanded="false" />
+                <element signature="e#3350#3351#0" expanded="false" />
+                <element signature="e#3376#3377#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -235,26 +342,11 @@
       <file leaf-file-name="BeddernetConsole.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.5555556">
-              <caret line="146" column="11" selection-start-line="146" selection-start-column="11" selection-end-line="146" selection-end-column="15" />
+            <state vertical-scroll-proportion="24.148148">
+              <caret line="600" column="0" selection-start-line="600" selection-start-column="0" selection-end-line="600" selection-end-column="0" />
               <folding>
-                <element signature="e#0#53026#0" expanded="true" />
+                <element signature="e#0#52950#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#9437#9953#0" expanded="true" />
-                <element signature="e#9952#9953#0" expanded="true" />
-                <element signature="e#10024#10051#0" expanded="true" />
-                <element signature="e#10414#11061#0" expanded="true" />
-                <element signature="e#11060#11061#0" expanded="true" />
-                <element signature="e#11301#11792#0" expanded="true" />
-                <element signature="e#11791#11792#0" expanded="true" />
-                <element signature="e#11864#12516#0" expanded="true" />
-                <element signature="e#12515#12516#0" expanded="true" />
-                <element signature="e#21567#25137#0" expanded="true" />
-                <element signature="e#25136#25137#0" expanded="true" />
-                <element signature="e#27935#28723#0" expanded="true" />
-                <element signature="e#28722#28723#0" expanded="true" />
-                <element signature="e#36379#36406#0" expanded="true" />
-                <element signature="e#44766#44793#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -272,27 +364,27 @@
       </file>
       <file leaf-file-name="activity_record.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_record.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
+            <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.9125">
+            <state vertical-scroll-proportion="0.0">
               <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -2179,6 +2271,83 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Beddernet" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Beddernet" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Beddernet" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="beddernet" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Beddernet" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="beddernet" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="approuter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Beddernet" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2419,83 +2588,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Beddernet" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Beddernet" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Beddernet" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="beddernet" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Beddernet" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="beddernet" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="approuter" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Beddernet" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2971,7 +3063,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="605" y="93" width="127" height="837" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3633842" sideWeight="0.43848354" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25104022" sideWeight="0.5078684" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25104022" sideWeight="0.5078684" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3025751" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.4914163" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.42203146" order="2" side_tool="false" content_ui="tabs" />
@@ -2981,7 +3073,6 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3633842" sideWeight="0.43848354" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22834645" sideWeight="0.49173555" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16920944" sideWeight="0.47424892" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24910523" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -2995,6 +3086,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994452" sideWeight="0.49713877" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16920944" sideWeight="0.47424892" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -3050,13 +3142,13 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java</url>
-          <line>1134</line>
+          <line>1123</line>
           <properties />
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java</url>
-          <line>1131</line>
+          <line>1120</line>
           <properties />
           <option name="timeStamp" value="157" />
         </line-breakpoint>
@@ -3098,7 +3190,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java</url>
-          <line>1039</line>
+          <line>1028</line>
           <properties />
           <option name="timeStamp" value="204" />
         </line-breakpoint>
@@ -3110,7 +3202,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java</url>
-          <line>735</line>
+          <line>724</line>
           <properties class="itu.beddernet.BeddernetConsole" />
           <option name="timeStamp" value="158" />
         </line-breakpoint>
@@ -3151,6 +3243,17 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/approuter/BeddernetClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3206,7 +3309,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3235,7 +3337,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.9259257">
           <caret line="121" column="39" selection-start-line="121" selection-start-column="32" selection-end-line="121" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3280,11 +3381,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2019231">
           <caret line="90" column="22" selection-start-line="90" selection-start-column="22" selection-end-line="90" selection-end-column="22" />
-          <folding>
-            <element signature="e#3803#3830#0" expanded="false" />
-            <element signature="e#5007#5008#0" expanded="false" />
-            <element signature="e#5036#5037#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3327,9 +3423,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23550087">
           <caret line="212" column="0" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
-          <folding>
-            <element signature="e#5659#5660#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3347,10 +3440,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23550087">
           <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2450#2451#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3374,30 +3463,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#9073#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#2272#2273#0" expanded="false" />
-            <element signature="e#2301#2302#0" expanded="false" />
-            <element signature="e#2567#2568#0" expanded="false" />
-            <element signature="e#2597#2598#0" expanded="false" />
-            <element signature="e#2864#2865#0" expanded="false" />
-            <element signature="e#2894#2895#0" expanded="false" />
-            <element signature="e#3163#3164#0" expanded="false" />
-            <element signature="e#3196#3197#0" expanded="false" />
-            <element signature="e#3436#3437#0" expanded="false" />
-            <element signature="e#3469#3470#0" expanded="false" />
-            <element signature="e#3713#3714#0" expanded="false" />
-            <element signature="e#3746#3747#0" expanded="false" />
-            <element signature="e#3987#3988#0" expanded="false" />
-            <element signature="e#4017#4018#0" expanded="false" />
-            <element signature="e#4240#4241#0" expanded="false" />
-            <element signature="e#4270#4271#0" expanded="false" />
-            <element signature="e#5169#5170#0" expanded="false" />
-            <element signature="e#5205#5206#0" expanded="false" />
-            <element signature="e#5470#5471#0" expanded="false" />
-            <element signature="e#5506#5507#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3416,7 +3481,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3325527">
           <caret line="2195" column="0" selection-start-line="2195" selection-start-column="0" selection-end-line="2195" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3457,7 +3521,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9125">
+        <state vertical-scroll-proportion="0.0">
           <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
           <folding />
         </state>
@@ -3467,14 +3531,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_record.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/datalink/bluetooth/BluetoothDatalink.java">
@@ -3497,7 +3561,114 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="3248" column="0" selection-start-line="3248" selection-start-column="0" selection-end-line="3248" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#297468#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#15471#15472#0" expanded="false" />
+            <element signature="e#15502#15503#0" expanded="false" />
+            <element signature="e#27340#27341#0" expanded="false" />
+            <element signature="e#27386#27387#0" expanded="false" />
+            <element signature="e#27419#27420#0" expanded="false" />
+            <element signature="e#27465#27466#0" expanded="false" />
+            <element signature="e#27503#27504#0" expanded="false" />
+            <element signature="e#27554#27555#0" expanded="false" />
+            <element signature="e#32240#32241#0" expanded="false" />
+            <element signature="e#32268#32269#0" expanded="false" />
+            <element signature="e#32308#32309#0" expanded="false" />
+            <element signature="e#32340#32341#0" expanded="false" />
+            <element signature="e#38060#38061#0" expanded="false" />
+            <element signature="e#38099#38100#0" expanded="false" />
+            <element signature="e#38624#38625#0" expanded="false" />
+            <element signature="e#38676#38677#0" expanded="false" />
+            <element signature="e#40970#40971#0" expanded="false" />
+            <element signature="e#41015#41016#0" expanded="false" />
+            <element signature="e#41066#41067#0" expanded="false" />
+            <element signature="e#41093#41094#0" expanded="false" />
+            <element signature="e#41618#41619#0" expanded="false" />
+            <element signature="e#41688#41689#0" expanded="false" />
+            <element signature="e#92862#92863#0" expanded="false" />
+            <element signature="e#92894#92895#0" expanded="false" />
+            <element signature="e#104386#104387#0" expanded="false" />
+            <element signature="e#104427#104428#0" expanded="false" />
+            <element signature="e#128647#128648#0" expanded="false" />
+            <element signature="e#128695#128696#0" expanded="false" />
+            <element signature="e#131561#131562#0" expanded="false" />
+            <element signature="e#131588#131589#0" expanded="false" />
+            <element signature="e#157379#157380#0" expanded="false" />
+            <element signature="e#157415#157416#0" expanded="false" />
+            <element signature="e#158312#158313#0" expanded="false" />
+            <element signature="e#158354#158355#0" expanded="false" />
+            <element signature="e#159095#159096#0" expanded="false" />
+            <element signature="e#159133#159134#0" expanded="false" />
+            <element signature="e#167463#167464#0" expanded="false" />
+            <element signature="e#167498#167499#0" expanded="false" />
+            <element signature="e#168272#168273#0" expanded="false" />
+            <element signature="e#168321#168322#0" expanded="false" />
+            <element signature="e#169803#169804#0" expanded="false" />
+            <element signature="e#169838#169839#0" expanded="false" />
+            <element signature="e#172918#172919#0" expanded="false" />
+            <element signature="e#172953#172954#0" expanded="false" />
+            <element signature="e#180822#180823#0" expanded="false" />
+            <element signature="e#180857#180858#0" expanded="false" />
+            <element signature="e#196591#196592#0" expanded="false" />
+            <element signature="e#196626#196627#0" expanded="false" />
+            <element signature="e#205309#205310#0" expanded="false" />
+            <element signature="e#205344#205345#0" expanded="false" />
+            <element signature="e#220627#220628#0" expanded="false" />
+            <element signature="e#220679#220680#0" expanded="false" />
+            <element signature="e#222419#222420#0" expanded="false" />
+            <element signature="e#222456#222457#0" expanded="false" />
+            <element signature="e#227526#227527#0" expanded="false" />
+            <element signature="e#227591#227592#0" expanded="false" />
+            <element signature="e#233130#233131#0" expanded="false" />
+            <element signature="e#233159#233160#0" expanded="false" />
+            <element signature="e#246271#246272#0" expanded="false" />
+            <element signature="e#246327#246328#0" expanded="false" />
+            <element signature="e#253430#253431#0" expanded="false" />
+            <element signature="e#253467#253468#0" expanded="false" />
+            <element signature="e#253825#253826#0" expanded="false" />
+            <element signature="e#253888#253889#0" expanded="false" />
+            <element signature="e#254450#254451#0" expanded="false" />
+            <element signature="e#254531#254532#0" expanded="false" />
+            <element signature="e#254821#254822#0" expanded="false" />
+            <element signature="e#254870#254871#0" expanded="false" />
+            <element signature="e#259233#259234#0" expanded="false" />
+            <element signature="e#259280#259281#0" expanded="false" />
+            <element signature="e#261183#261184#0" expanded="false" />
+            <element signature="e#261251#261252#0" expanded="false" />
+            <element signature="e#263964#263965#0" expanded="false" />
+            <element signature="e#263992#263993#0" expanded="false" />
+            <element signature="e#271099#271100#0" expanded="false" />
+            <element signature="e#271126#271127#0" expanded="false" />
+            <element signature="e#271190#271191#0" expanded="false" />
+            <element signature="e#271217#271218#0" expanded="false" />
+            <element signature="e#271270#271271#0" expanded="false" />
+            <element signature="e#271331#271332#0" expanded="false" />
+            <element signature="e#271393#271394#0" expanded="false" />
+            <element signature="e#271420#271421#0" expanded="false" />
+            <element signature="e#271482#271483#0" expanded="false" />
+            <element signature="e#271509#271510#0" expanded="false" />
+            <element signature="e#271560#271561#0" expanded="false" />
+            <element signature="e#271619#271620#0" expanded="false" />
+            <element signature="e#271681#271682#0" expanded="false" />
+            <element signature="e#271708#271709#0" expanded="false" />
+            <element signature="e#271770#271771#0" expanded="false" />
+            <element signature="e#271797#271798#0" expanded="false" />
+            <element signature="e#271848#271849#0" expanded="false" />
+            <element signature="e#271907#271908#0" expanded="false" />
+            <element signature="e#274993#274994#0" expanded="false" />
+            <element signature="e#275021#275022#0" expanded="false" />
+            <element signature="e#275521#275522#0" expanded="false" />
+            <element signature="e#275567#275568#0" expanded="false" />
+            <element signature="e#275929#275930#0" expanded="false" />
+            <element signature="e#276003#276004#0" expanded="false" />
+            <element signature="e#276262#276263#0" expanded="false" />
+            <element signature="e#276304#276305#0" expanded="false" />
+            <element signature="e#283134#283135#0" expanded="false" />
+            <element signature="e#283168#283169#0" expanded="false" />
+            <element signature="e#283770#283771#0" expanded="false" />
+            <element signature="e#283816#283817#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3513,7 +3684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3326087">
           <caret line="1916" column="0" selection-start-line="1916" selection-start-column="0" selection-end-line="1916" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3527,7 +3697,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/audio/FrameLayoutFixed.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5555553">
+        <state vertical-scroll-proportion="0.0">
           <caret line="129" column="44" selection-start-line="129" selection-start-column="42" selection-end-line="129" selection-end-column="44" />
           <folding />
         </state>
@@ -3545,7 +3715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16447368">
           <caret line="459" column="0" selection-start-line="459" selection-start-column="0" selection-end-line="459" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3561,52 +3730,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="81" selection-start-line="34" selection-start-column="81" selection-end-line="34" selection-end-column="81" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3174#3175#0" expanded="false" />
+            <element signature="e#3205#3206#0" expanded="false" />
+            <element signature="e#3350#3351#0" expanded="false" />
+            <element signature="e#3376#3377#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/recordSound/recordActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.185185">
+        <state vertical-scroll-proportion="0.0">
           <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2736#3097#0" expanded="true" />
-            <element signature="e#3096#3097#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itu/beddernet/BeddernetConsole.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.5555556">
-          <caret line="146" column="11" selection-start-line="146" selection-start-column="11" selection-end-line="146" selection-end-column="15" />
+        <state vertical-scroll-proportion="24.148148">
+          <caret line="600" column="0" selection-start-line="600" selection-start-column="0" selection-end-line="600" selection-end-column="0" />
           <folding>
-            <element signature="e#0#53026#0" expanded="true" />
+            <element signature="e#0#52950#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#9437#9953#0" expanded="true" />
-            <element signature="e#9952#9953#0" expanded="true" />
-            <element signature="e#10024#10051#0" expanded="true" />
-            <element signature="e#10414#11061#0" expanded="true" />
-            <element signature="e#11060#11061#0" expanded="true" />
-            <element signature="e#11301#11792#0" expanded="true" />
-            <element signature="e#11791#11792#0" expanded="true" />
-            <element signature="e#11864#12516#0" expanded="true" />
-            <element signature="e#12515#12516#0" expanded="true" />
-            <element signature="e#21567#25137#0" expanded="true" />
-            <element signature="e#25136#25137#0" expanded="true" />
-            <element signature="e#27935#28723#0" expanded="true" />
-            <element signature="e#28722#28723#0" expanded="true" />
-            <element signature="e#36379#36406#0" expanded="true" />
-            <element signature="e#44766#44793#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4814815">
-          <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.8194444">
+          <caret line="70" column="38" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="38" />
           <folding />
         </state>
       </provider>
