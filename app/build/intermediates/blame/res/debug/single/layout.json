@@ -104,6 +104,10 @@
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
     {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/layout/mylist.xml",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/layout/mylist.xml"
+    },
+    {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_part_time.xml"
     },

@@ -24,8 +24,20 @@
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/papierfliegergruen.png",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/drawable/papierfliegergruen.png"
+    },
+    {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/papierflieger_states.xml",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/drawable/papierflieger_states.xml"
+    },
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/papierfliegerrotpressed.png",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/drawable/papierfliegerrotpressed.png"
     },
     {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
@@ -34,6 +46,10 @@
     {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
         "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/papierfliegerrot.png",
+        "source": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/src/main/res/drawable/papierfliegerrot.png"
     },
     {
         "merged": "/Users/erichklassen/AndroidStudioProjects/Beddernet/app/build/intermediates/res/merged/debug/drawable/icon.png",

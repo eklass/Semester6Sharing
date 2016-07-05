@@ -1,15 +1,19 @@
-//Sammlung an Links: 	http://stackoverflow.com/questions/23945171/android-app-bluetooth-connection-without-pairing
-//Handler:				http://stackoverflow.com/questions/13079645/android-how-to-wait-asynctask-to-finish-in-mainthread
-//Disabling Keyboard: 	http://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
-// Now working on: 		http://stackoverflow.com/questions/22573301/how-to-pass-a-handler-from-activity-to-service
-// 						http://stackoverflow.com/questions/6369287/accessing-ui-thread-handler-from-a-service
-//                      http://stackoverflow.com/questions/14695537/android-update-activity-ui-from-service
-//VoiceButton           http://stackoverflow.com/questions/28711549/how-to-create-a-whatsapp-like-recording-button-with-slide-to-cancel
-//(interessant Voice)   http://stackoverflow.com/questions/11116051/how-can-i-record-voice-in-android-as-long-as-hold-a-button
+//Sammlung an Links: 	    http://stackoverflow.com/questions/23945171/android-app-bluetooth-connection-without-pairing
+//Handler:				    http://stackoverflow.com/questions/13079645/android-how-to-wait-asynctask-to-finish-in-mainthread
+//Disabling Keyboard: 	    http://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
+// Now working on: 		    http://stackoverflow.com/questions/22573301/how-to-pass-a-handler-from-activity-to-service
+// 					    	http://stackoverflow.com/questions/6369287/accessing-ui-thread-handler-from-a-service
+//                          http://stackoverflow.com/questions/14695537/android-update-activity-ui-from-service
+//VoiceButton               http://stackoverflow.com/questions/28711549/how-to-create-a-whatsapp-like-recording-button-with-slide-to-cancel
+//(interessant Voice)       http://stackoverflow.com/questions/11116051/how-can-i-record-voice-in-android-as-long-as-hold-a-button
+//Workaround CustomListView http://stackoverflow.com/questions/10869197/android-widget-linearlayout-cannot-be-cast-to-android-widget-textview
+//CustomListView            http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
+//PapierFlieger             https://image.freepik.com/vektoren-kostenlos/bunte-papierflieger-vektor_23-2147498226.jpg
+
+
 
 package itu.beddernet;
 
-import audio.MainActivity;
 import itu.beddernet.approuter.IBeddernetService;
 import itu.beddernet.approuter.IBeddernetServiceCallback;
 import itu.beddernet.common.BeddernetInfo;
@@ -28,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -73,6 +78,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,7 +95,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class BeddernetConsole extends Activity implements ServiceConnection {
 
-
+    String[] actualDeviceList;
+    private List<String> mItems;
+    ImageButton oneClickVoicePaperButton;
 
     /*VOICE-BUTTON VARIABLE*/
     private TextView recordTimeText;
@@ -103,6 +111,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
     private Timer timer;
+    /*Voice-Variable-End*/
 
     static final public String BEDDERNETCONSOLE_DO_REFRESHING = "refreshDevices";
     static final public String BEDDERNETCONSOLE_DO_SEARCHING = "searchForDevices";
@@ -143,6 +152,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
             .hashCode();
     public boolean sendAudioFile = false;
     public ArrayAdapter<String> mDeviceArrayAdapter;
+    public CustomAdapter testAdapter;
     public ArrayList<String> deviceColorList;
     public TextView outputTextView;
     String mFileNameToSend = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -240,6 +250,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                     // calling to this function from other pleaces
                     // The notice call method of doing things
                     break;
+                case 1:
+                    Log.e(TAG,"Ich wurde von CustomAdapter aufgerufen");
                 default:
                     break;
             }
@@ -277,14 +289,19 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
         }
     };
+
     /*
     * This method will be called, if someone clicks on a device to communicate
     * OnItemClicklistener nutzt den substring um auf die Adresse zu kommen (eigentlich clever)
+    * Kleiner Workaround wegen CustomListView war von Nöten
     * */
     private OnItemClickListener mListListener = new OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
 
-            String address = ((TextView) v).getText().toString();
+            LinearLayout ll = (LinearLayout) v; // get the parent layout view
+            TextView tv = (TextView) ll.findViewById(R.id.Itemname); // get the child text view
+            //String address = ((TextView) v).getText().toString();
+            String address = tv.getText().toString();
             if (address != null) {
                 address = address.substring(0, 17); // Ugly removes the status
                 sendMessage(address);
@@ -293,6 +310,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                 refreshDeviceList();
             }
         }
+
     };
     private CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
 
@@ -461,7 +479,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         }
     };
 
-    private void vibrate() {
+    public void vibrate() {
         // TODO Auto-generated method stub
         try {
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -512,6 +530,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
         this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
         setContentView(R.layout.main);
+
+
+
         /*------ HERE COMES THE VOICEBUTTONFIX -----------*/
         final recordActivity recordSound = new recordActivity();
         recordPanel = findViewById(R.id.record_panel);
@@ -600,28 +621,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         /*----------------------HERE IS THE END OF VOICEBUTTONFIX--------------------*/
 
 
-        //recVoiceButton.setOnClickListener(buttonListnener);
-        /*final recordActivity recordSound=new recordActivity();
-        recVoiceButton.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                switch(event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        vibrate();
-                        RecordLog.logString("Start Recording");
-                        recordSound.startRecording();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        RecordLog.logString("stop Recording");
-                        recordSound.stopRecording();
-                        break;
-                }
-                return false;
-            }
-        });*/
-
         Button clrTxtButton = (Button) findViewById(R.id.clrTxt);
         clrTxtButton.setOnClickListener(buttonListnener);
         //Button refDeviceButton = (Button) findViewById(R.id.refDevice);
@@ -631,13 +630,25 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         maintainer.setOnCheckedChangeListener(checkBoxListener);
 
         // Initialize the array adapter for the conversation thread
-        mDeviceArrayAdapter = new ArrayAdapter<String>(this, R.layout.message);
-        mDeviceView = (ListView) findViewById(R.id.in);
-        registerForContextMenu(mDeviceView);
+        //mDeviceArrayAdapter = new ArrayAdapter<String>(this, R.layout.message);
+        mDeviceArrayAdapter = new ArrayAdapter<String>(
+                this, R.layout.mylist,
+                R.id.Itemname);
 
-        mDeviceView.setAdapter(mDeviceArrayAdapter);
+        mItems = new ArrayList<String>();
+        testAdapter = new CustomAdapter(this,R.layout.mylist,mItems);
+
+        mDeviceView = (ListView) findViewById(R.id.in);
+        //mDeviceView.setAdapter(mDeviceArrayAdapter);
+        mDeviceView.setAdapter(testAdapter);
         mDeviceView.setOnItemClickListener(mListListener);
         mDeviceView.setHapticFeedbackEnabled(true);
+/*        this.setListAdapter(new ArrayAdapter<String>(
+                this, R.layout.mylist,
+                R.id.Itemname,itemname));
+*/
+        registerForContextMenu(mDeviceView);
+
         activity = this;
 
         outputTextView = (TextView) findViewById(R.id.outputTextView);
@@ -676,6 +687,16 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                         searchForDevices();
                         break;
                 }
+                // A Hashtag is only send from the CustomAdapter
+                if (s.substring(0,1).equals("#")){
+                    // now string s is the number the entry which was clicked
+                    s=s.substring(1,2);
+                    String addressToSendFile = actualDeviceList[Integer.parseInt(s)*2];
+                    Log.e(TAG,"Nachricht von CustomAdapter!!");
+                    sendAudioFile = true;
+                    sendFile(addressToSendFile);
+                    sendAudioFile = false;
+                }
 
                 Log.e(TAG, "Die Nachricht vom BroadcastReceiver ist: "+s);
                 // do something here.
@@ -685,6 +706,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
         inputText = (EditText) findViewById(R.id.writeSomeText);
         deviceColorList = new ArrayList<String>();
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -784,10 +806,10 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
                 startActivity(Intent.createChooser(intent, "Share app"));
 
         }
-        int id = item.getItemId();
+        /*int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
         return super.onOptionsItemSelected(item);
         //return false;
     }
@@ -808,28 +830,32 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
         serviceConnectionStatus = "Service disconnected";
     }
 
+
     private void refreshDeviceList() {
-        mDeviceArrayAdapter.clear();
+        // #FIX ADAPTER mDeviceArrayAdapter.clear();
+        testAdapter.clear();
         //deviceColorList.clear();
-        String[] deviceList = null;
+        actualDeviceList = null;
         try {
-            deviceList = mBeddernetService.getDevicesWithStatus();
+            actualDeviceList = mBeddernetService.getDevicesWithStatus();
         } catch (Exception e) {
             Log.e(TAG, "Remote Exception while getting list of devices", e);
         }
-        if (deviceList != null && deviceList.length > 0) {
+        if (actualDeviceList != null && actualDeviceList.length > 0) {
             Log.d(TAG, "getDevicesWithStatus is not null");
-            // deviceList.length/2 removed and <= to <      <--- this is crap from beddernetcreater :D
-            for (int i = 0; i < deviceList.length; i = i + 2) {
-                Log.d(TAG, "List size: " + deviceList.length);
+            // actualDeviceList.length/2 removed and <= to <      <--- this is crap from beddernetcreater :D
+            for (int i = 0; i < actualDeviceList.length; i = i + 2) {
+                Log.d(TAG, "List size: " + actualDeviceList.length);
 
                 //#Edit Change the Macadress to Devicename
-                //mDeviceArrayAdapter.add(deviceList[i] + ":" + deviceList[i + 1]);
+                //mDeviceArrayAdapter.add(actualDeviceList[i] + ":" + actualDeviceList[i + 1]);
                 try {
-                    mDeviceArrayAdapter.add(deviceList[i] + ":" + mBeddernetService.getDeviceName(deviceList[i]) + ":" + deviceList[i + 1]);
+                    // #FIX ADAPTER mDeviceArrayAdapter.add(actualDeviceList[i] + ":" + mBeddernetService.getDeviceName(actualDeviceList[i]) + ":" + actualDeviceList[i + 1]);
+                    testAdapter.add(actualDeviceList[i] + ":" + mBeddernetService.getDeviceName(actualDeviceList[i]) + ":" + actualDeviceList[i + 1]);
+                    testAdapter.notifyDataSetChanged();
                     // If the Mac-Address is already in deviceColorList, than dont add it
-                    if (!deviceColorList.contains(deviceList[i])) {
-                        deviceColorList.add(deviceList[i]);
+                    if (!deviceColorList.contains(actualDeviceList[i])) {
+                        deviceColorList.add(actualDeviceList[i]);
                     }
                 } catch (RemoteException e) {
                     Log.e(TAG, "Error to get DeviceName");
